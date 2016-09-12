@@ -1,0 +1,99 @@
+{
+  "name": "react-mdl-extra",
+  "version": "0.0.1",
+  "description": "React MDL Extra Components",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "scripts": {
+    "clean": "rimraf lib dist es",
+    "start": "npm run storybook",
+    "storybook": "cross-env NODE_ENV=development start-storybook -p 9002",
+    "deploy-storybook": "storybook-to-ghpages",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack --progress --verbose --colors",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack --progress --verbose --colors",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "lint": "eslint src/** test/**",
+    "prepublish": "npm run clean && npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "mocha --require test/config/setup 'test/*.js'",
+    "test:cover": "istanbul cover -x *.test.js _mocha -- -R spec --require test/config/setup 'test/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HriBB/react-mdl-extra.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "mdl",
+    "material-design",
+    "select",
+    "select-field",
+    "menu",
+    "dropdown"
+  ],
+  "author": {
+    "name": "Bojan Hribernik",
+    "email": "bojan.hribernik@gmail.com",
+    "url": "http://climbuddy.com/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HriBB/react-mdl-extra/issues"
+  },
+  "homepage": "https://hribb.github.io/react-mdl-extra/",
+  "peerDependencies": {
+    "react-mdl": "^1.6.1"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "^2.12.0",
+    "autoprefixer": "^6.4.1",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
+    "cross-env": "^2.0.1",
+    "css-loader": "^0.25.0",
+    "enzyme": "^2.4.1",
+    "eslint": "^3.4.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-react": "^6.2.0",
+    "expect": "^1.20.2",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "faker": "^3.1.0",
+    "ghooks": "^1.3.2",
+    "html-webpack-plugin": "^2.22.0",
+    "html-webpack-plugin-remove": "0.0.2",
+    "isparta": "^4.0.0",
+    "istanbul": "^1.1.0-alpha.1",
+    "jsdom": "^9.5.0",
+    "mocha": "^3.0.2",
+    "node-sass": "^3.9.3",
+    "normalize.css": "^4.2.0",
+    "postcss": "^5.2.0",
+    "postcss-loader": "^0.11.1",
+    "rimraf": "^2.5.4",
+    "sass-loader": "^4.0.2",
+    "semantic-release": "^4.3.5",
+    "sinon": "^1.17.5",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "@kadira/storybook-deployer": "^1.1.0",
+    "classnames": "^2.2.5",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-mdl": "^1.7.1",
+    "react-mdl-portal-menu": "^1.0.1",
+    "react-portal": "^2.2.1"
+  }
+}

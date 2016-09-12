@@ -1,0 +1,11 @@
+node_modules
+*.log
+.DS_Store
+dist
+lib
+es
+coverage
+.idea
+examples/bundle.js
+examples/style.css
+npm-debug.log

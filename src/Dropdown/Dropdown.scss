@@ -1,0 +1,47 @@
+
+.react-mdl-dropdown {
+  position: absolute;
+  z-index: 9999;
+  display: inline-block;
+  opacity: 0;
+  //min-width: 124px;
+
+  .react-mdl-menu__list {
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+  }
+
+  .react-mdl-menu__item {
+    cursor: pointer;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 16px;
+
+    &:first-child {
+      margin-top: 5px;
+    }
+
+    &:last-child {
+      margin-bottom: 5px;
+    }
+
+    &:hover {
+      background: #eee;
+    }
+
+    &:focus {
+      outline: none;
+      background: #eee;
+    }
+
+  }
+
+}

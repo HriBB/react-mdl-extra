@@ -1,0 +1,52 @@
+.react-mdl-selectfield {
+  position: relative;
+  width: 300px;
+
+  /*
+  &.react-mdl-selectfield--floating-label {
+    .mdl-menu__container {
+      margin-top: -46px;
+    }
+  }
+
+  &.react-mdl-selectfield--menu-below {
+    .mdl-menu__container {
+      margin-top: -20px;
+    }
+  }
+
+  &.react-mdl-selectfield--empty {
+    .mdl-menu__container {
+      display: none;
+    }
+  }
+  */
+
+  &.react-mdl-selectfield--error {
+    .react-mdl-selectfield__arrow {
+      color: #d50000;
+    }
+  }
+
+  .mdl-textfield {
+    width: 100%;
+
+    &.is-invalid {
+      .mdl-textfield__label {
+        color: #d50000;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .react-mdl-selectfield__arrow {
+    cursor: pointer;
+    position: absolute;
+    font-size: 20px;
+    line-height: 27px;
+    top: 20px;
+    right: 0px;
+    color: #ccc;
+  }
+
+}

@@ -1,0 +1,28 @@
+.react-mdl-option {
+  cursor: pointer;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 16px;
+
+  &.react-mdl-option--selected {
+    color: #ff4081;
+  }
+
+  &:first-child {
+    margin-top: 5px;
+  }
+
+  &:last-child {
+    margin-bottom: 5px;
+  }
+
+  &:hover {
+    background: #eee;
+  }
+
+  &:focus {
+    outline: none;
+    background: #eee;
+  }
+
+}
