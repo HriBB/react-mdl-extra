@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var env = process.env.NODE_ENV;
 var suffix = env === 'production' ? '.min' : '';
-var filename = `react-mdl-selectfield${suffix}`;
+var filename = `react-mdl-extra${suffix}`;
 
 var config = {
   entry: [
