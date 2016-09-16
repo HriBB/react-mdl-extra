@@ -1,6 +1,5 @@
-import React, { Component, Children, PropTypes, cloneElement } from 'react'
-import ReactDOM, { findDOMNode } from 'react-dom'
-import { Textfield, Icon } from 'react-mdl'
+import React, { Component, Children, PropTypes } from 'react'
+import { Textfield } from 'react-mdl'
 import classnames from 'classnames'
 
 import './SelectField.scss'
@@ -16,26 +15,19 @@ export default class SelectField extends Component {
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     floatingLabel: PropTypes.bool,
     label: PropTypes.string.isRequired,
-    showMenuBelow: PropTypes.bool,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     readOnly: PropTypes.bool,
+    showMenuBelow: PropTypes.bool,
     value: PropTypes.any,
-  }
-
-  static defaultProps = {
-    showMenuBelow: false,
   }
 
   constructor(props) {
     super(props)
-
-    // focused state
-    this.state = { focused: false }
-
-    // bind methods
     this.onItemClick = this.onItemClick.bind(this)
+    this.onTextfieldFocus = this.onTextfieldFocus.bind(this)
+    this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
   }
 
   getInputNode() {
@@ -51,30 +43,12 @@ export default class SelectField extends Component {
 
   onTextfieldFocus() {
     const { value, onFocus } = this.props
-    this.showMenu()
-    this.setState({ focused: true })
     if (onFocus) onFocus(value)
   }
 
   onTextfieldBlur() {
     const { value, onBlur } = this.props
-    this.setState({ focused: false })
     if (onBlur) onBlur(value)
-  }
-
-  onTextfieldKeyDown(e) {
-    const TAB = 9
-    const ESCAPE = 27
-
-    switch (e.which) {
-      case TAB:
-        this.hideMenu()
-        break
-      case ESCAPE:
-        this.getInputNode().blur()
-        this.hideMenu()
-        break
-    }
   }
 
   render() {
@@ -85,14 +59,12 @@ export default class SelectField extends Component {
     const children = Children.toArray(this.props.children)
 
     const mainClass = classnames('react-mdl-selectfield', {
-      'react-mdl-selectfield--menu-below': showMenuBelow,
-      'react-mdl-selectfield--floating-label': floatingLabel,
-      'react-mdl-selectfield--empty': !children.length,
       'react-mdl-selectfield--error': error,
     }, className)
 
-    const index = children.findIndex(c => c.props.value === value)
-    const inputValue = index > -1 ? children[index].props.children : ''
+    const isValue = value !== undefined && value !== null && value !== ''
+    const index = isValue && children.findIndex(c => c.props.value === value)
+    const inputValue = isValue && index > -1 ? children[index].props.children : ''
 
     const inputProps = {
       type: 'text',
@@ -104,29 +76,26 @@ export default class SelectField extends Component {
       ref: ref => this.input = ref,
     }
 
-    /*
     if (!readOnly) {
+      inputProps.onMouseDown = this.onTextfieldMouseDown
       inputProps.onFocus = this.onTextfieldFocus
       inputProps.onBlur = this.onTextfieldBlur
-      inputProps.onKeyDown = this.onTextfieldKeyDown
     }
-    */
+
+    const offset = showMenuBelow ? [0, -20] : [0, -49]
 
     return (
       <div className={mainClass}>
 
-        <Dropdown target={<Textfield {...inputProps}/>} offset={[0, -49]} useTargetWidth>
-          <OptionList value={value} onItemClick={this.onItemClick}>
-            {children}
-          </OptionList>
-        </Dropdown>
+        {readOnly &&
+          <Textfield {...inputProps}/>}
 
         {!readOnly &&
-          <Icon
-            className={'react-mdl-selectfield__arrow'}
-            name={`arrow_drop_${this.state.focused ? 'up' : 'down'}`}
-            onClick={this.showMenu}
-          />}
+          <Dropdown target={<Textfield {...inputProps}/>} offset={offset} useTargetWidth>
+            <OptionList value={value} onItemClick={this.onItemClick}>
+              {children}
+            </OptionList>
+          </Dropdown>}
 
       </div>
     )

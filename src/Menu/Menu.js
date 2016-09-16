@@ -1,7 +1,5 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
-import ReactDOM, { findDOMNode } from 'react-dom'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
-import Portal from 'react-portal'
 
 import './Menu.scss'
 

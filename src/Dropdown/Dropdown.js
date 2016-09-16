@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import classnames from 'classnames'
 import Portal from 'react-portal'
@@ -11,10 +11,11 @@ export default class Dropdown extends Component {
     align: PropTypes.oneOf(['left', 'right']),
     children: PropTypes.any.isRequired,
     className: PropTypes.string,
-    isOpen: PropTypes.bool,
+    closeOnEsc: PropTypes.bool,
+    closeOnOutsideClick: PropTypes.bool,
     offset: PropTypes.array,
     padding: PropTypes.number,
-    target: PropTypes.element,
+    target: PropTypes.element.isRequired,
     useTargetWidth: PropTypes.bool,
     valign: PropTypes.oneOf(['bottom', 'top']),
   }
@@ -24,15 +25,12 @@ export default class Dropdown extends Component {
     closeOnEsc: true,
     closeOnOutsideClick: true,
     offset: [0, 0],
-    padding: 0,
+    padding: 10,
     valign: 'bottom',
   }
 
   constructor(props) {
     super(props)
-    if (!props.isOpen && !props.target) {
-      throw new Error('Dropdown needs either "isOpen" or "target" prop!')
-    }
     this.show = this.show.bind(this)
   }
 
@@ -166,20 +164,12 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    const {
-      children,
-      className,
-      closeOnEsc,
-      closeOnOutsideClick,
-      isOpen,
-      target
-    } = this.props
+    const { children, className, closeOnEsc, closeOnOutsideClick, target } = this.props
     const portalClass = classnames('react-mdl-dropdown', className)
-    const props = target ? { openByClickOn: target } : { isOpen }
     return (
       <Portal
-        {...props}
         className={portalClass}
+        openByClickOn={target}
         closeOnEsc={closeOnEsc}
         closeOnOutsideClick={closeOnOutsideClick}
         onOpen={this.show}

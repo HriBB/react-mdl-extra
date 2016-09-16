@@ -2,26 +2,6 @@
   position: relative;
   width: 300px;
 
-  /*
-  &.react-mdl-selectfield--floating-label {
-    .mdl-menu__container {
-      margin-top: -46px;
-    }
-  }
-
-  &.react-mdl-selectfield--menu-below {
-    .mdl-menu__container {
-      margin-top: -20px;
-    }
-  }
-
-  &.react-mdl-selectfield--empty {
-    .mdl-menu__container {
-      display: none;
-    }
-  }
-  */
-
   &.react-mdl-selectfield--error {
     .react-mdl-selectfield__arrow {
       color: #d50000;

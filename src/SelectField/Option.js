@@ -16,6 +16,7 @@ export default class Option extends Component {
     onClick: PropTypes.func,
     selected: PropTypes.bool,
     tabIndex: PropTypes.number,
+    value: PropTypes.any,
   }
 
   constructor(props) {

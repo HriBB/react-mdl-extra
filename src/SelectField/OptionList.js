@@ -13,11 +13,15 @@ export default class OptionList extends Component {
     value: PropTypes.any,
   }
 
+  componentDidMount() {
+    this.list.firstChild.focus()
+  }
+
   render() {
     const { children, closePortal, className, onItemClick, value } = this.props
     const listClass = classnames('react-mdl-option__list', className)
     return (
-      <ul className={listClass}>
+      <ul className={listClass} ref={ref => this.list = ref}>
         {Children.map(children, (child, index) => cloneElement(child, {
           closeMenu: closePortal,
           onClick: onItemClick,

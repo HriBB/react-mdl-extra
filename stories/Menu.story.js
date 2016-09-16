@@ -17,8 +17,8 @@ storiesOf('Menu', module)
   .add('left/right top/bottom', () => {
     const styles = {
       center: {
-        position: 'absolute', width: '100%', height: '100%', display: 'flex',
-        justifyContent: 'center', alignItems: 'center',
+        position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px',
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
       },
       wrap: {
         textAlign: 'center',

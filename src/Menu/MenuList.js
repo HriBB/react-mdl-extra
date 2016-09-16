@@ -11,11 +11,15 @@ export default class MenuList extends Component {
     closePortal: PropTypes.func,
   }
 
+  componentDidMount() {
+    this.list.firstChild.focus()
+  }
+
   render() {
     const { children, closePortal, className } = this.props
     const listClass = classnames('react-mdl-menu__list', className)
     return (
-      <ul className={listClass}>
+      <ul className={listClass} ref={ref => this.list = ref}>
         {Children.map(children, (child, index) => cloneElement(child, {
           tabIndex: index + 1,
           closeMenu: closePortal,

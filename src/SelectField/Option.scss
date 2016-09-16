@@ -8,6 +8,14 @@
     color: #ff4081;
   }
 
+  &.react-mdl-option--disabled {
+    color: #bbb;
+    &:hover {
+      background: #fff;
+      cursor: default;
+    }
+  }
+
   &:first-child {
     margin-top: 5px;
   }
