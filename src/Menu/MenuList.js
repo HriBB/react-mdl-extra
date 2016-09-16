@@ -12,7 +12,9 @@ export default class MenuList extends Component {
   }
 
   componentDidMount() {
-    this.list.firstChild.focus()
+    setTimeout(() => {
+      this.list.firstChild.focus()
+    }, 30)
   }
 
   render() {

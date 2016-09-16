@@ -1,23 +1,20 @@
 # React-MDL SelectField
 
-Selectfield component for [React Material Design Lite](https://github.com/tleunen/react-mdl)
+Extra components for [React Material Design Lite](https://github.com/tleunen/react-mdl)
 
 ## Installation
 
 ```
-npm install --save react-mdl-selectfield
+npm install --save react-mdl-extra
 ```
 
 ## Examples
 
-I am in a process of rewriting `SelectField` and `MultiSelectField` to be completely stateless.
-Because of this, examples wont work as expected. I will update them soon ;)
-
-https://hribb.github.io/react-mdl-selectfield/
+https://hribb.github.io/react-mdl-extra/
 
 ```
-git clone https://github.com/HriBB/react-mdl-selectfield
-cd react-mdl-selectfield
+git clone https://github.com/HriBB/react-mdl-extra
+cd react-mdl-extra
 npm install
 npm run storybook
 open http://localhost:9002/
@@ -25,8 +22,10 @@ open http://localhost:9002/
 
 ## Usage
 
+### SelectField
+
 ```
-import { SelectField, Option } from 'react-mdl-selectfield';
+import { SelectField, Option } from 'react-mdl-extra';
 
 render() {
   return() (
@@ -41,29 +40,27 @@ render() {
 }
 ```
 
-`<Option>` component requires a string `children` prop for filtering to work.
-This sucks, because you cannot put anything complex (such as `Icon`) inside `Option`.
-That is why `AutoCompleteField` component is on its way ;)
-Until then you should stringify your `<Option>` children:
+### Menu
 
 ```
-<SelectField label={'Select me'}>
-  {users.map(user =>
-    <Option key={user.id} value={user.id}>
-      {`${user.first_name} ${user.last_name}`}
-    </Option>
-  )}
-</SelectField>
+import { Menu, MenuItem } from 'react-mdl-extra';
+
+render() {
+  return() (
+    <Menu target={<Button raised>Open menu</Button>}>
+      <MenuItem>One</MenuItem>
+      <MenuItem>Two</MenuItem>
+      <MenuItem>Three</MenuItem>
+    </Menu>
+  )
+}
 ```
 
 ## TODO
 
-- [x] Add `readOnly` prop to `SelectField` and `MultiSelectField`
-- [x] Make `SelectField` and `MultiSelectField` completely stateless
+- [ ] Add key bindings
+- [ ] Fix focus handling
+- [ ] Create `MultiSelectField`
 - [ ] Create `AutoCompleteField`
-- [x] Pray for a good `Selectfield` in [`mdl v2`](https://github.com/google/material-design-lite/issues/4475)
-
-## Component boilerplate
-
-Using [react-component-boilerplate](https://github.com/ritz078/react-component-boilerplate)
-with some modifications and improvements.
+- [ ] Create `DatePickerField`
+- [ ] Add tests

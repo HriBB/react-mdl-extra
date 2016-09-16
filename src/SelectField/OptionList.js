@@ -14,7 +14,10 @@ export default class OptionList extends Component {
   }
 
   componentDidMount() {
-    this.list.firstChild.focus()
+    console.log('componentDidMount');
+    setTimeout(() => {
+      this.list.firstChild.focus()
+    }, 30)
   }
 
   render() {
