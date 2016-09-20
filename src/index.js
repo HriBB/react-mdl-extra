@@ -4,4 +4,5 @@ export Menu from './Menu'
 export MenuItem from './Menu/MenuItem'
 
 export SelectField from './SelectField'
+export MultiSelectField from './MultiSelectField'
 export Option from './SelectField/Option'
