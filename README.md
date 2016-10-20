@@ -76,8 +76,9 @@ render() {
 
 ## TODO
 
+- [ ] Remove sass dependency from the project
 - [x] Use Tether for dropdown positioning
-- [ ] Improve position handling
+- [ ] Improve position declaration
 - [x] Create `MultiSelectField`
 - [ ] Create `AutoCompleteField`
 - [ ] Create `DatePickerField`
