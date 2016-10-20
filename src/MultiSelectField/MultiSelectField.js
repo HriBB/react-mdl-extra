@@ -1,5 +1,5 @@
 import React, { Component, Children, PropTypes } from 'react'
-import { Textfield, Chip } from 'react-mdl'
+import { Chip } from 'react-mdl'
 import classnames from 'classnames'
 
 import './MultiSelectField.scss'
@@ -14,7 +14,7 @@ export default class MultiSelectField extends Component {
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    floatingLabel: PropTypes.bool,
+    //floatingLabel: PropTypes.bool,
     label: PropTypes.string.isRequired,
     offset: PropTypes.string,
     onFocus: PropTypes.func,
@@ -46,14 +46,12 @@ export default class MultiSelectField extends Component {
   }
 
   onTextfieldFocus() {
-    console.log('onFocus');
     const { value, onFocus } = this.props
     this.setState({ focused: true })
     if (onFocus) onFocus(value)
   }
 
   onTextfieldBlur() {
-    console.log('onBlur');
     const { value, onBlur } = this.props
     this.setState({ focused: false })
     if (onBlur) onBlur(value)
@@ -69,7 +67,7 @@ export default class MultiSelectField extends Component {
 
   render() {
     const {
-      align, className, error, floatingLabel, label,
+      align, className, error, label,
       offset, readOnly, talign, value,
     } = this.props
 
