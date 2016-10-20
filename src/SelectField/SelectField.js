@@ -25,6 +25,7 @@ export default class SelectField extends Component {
 
   constructor(props) {
     super(props)
+    this.state = { focused: false }
     this.onItemClick = this.onItemClick.bind(this)
     this.onTextfieldFocus = this.onTextfieldFocus.bind(this)
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
@@ -43,11 +44,13 @@ export default class SelectField extends Component {
 
   onTextfieldFocus() {
     const { value, onFocus } = this.props
+    this.setState({ focused: true })
     if (onFocus) onFocus(value)
   }
 
   onTextfieldBlur() {
     const { value, onBlur } = this.props
+    this.setState({ focused: false })
     if (onBlur) onBlur(value)
   }
 
@@ -55,6 +58,8 @@ export default class SelectField extends Component {
     const {
       className, error, floatingLabel, label, showMenuBelow, readOnly, value,
     } = this.props
+    
+    const { focused } = this.state
 
     const children = Children.toArray(this.props.children)
 
@@ -82,7 +87,7 @@ export default class SelectField extends Component {
       inputProps.onBlur = this.onTextfieldBlur
     }
 
-    const offset = showMenuBelow ? [0, -20] : [0, -49]
+    const dropdownOffset = showMenuBelow ? [0, -20] : [0, -49]
 
     return (
       <div className={mainClass}>
@@ -91,11 +96,17 @@ export default class SelectField extends Component {
           <Textfield {...inputProps}/>}
 
         {!readOnly &&
-          <Dropdown target={<Textfield {...inputProps}/>} offset={offset} useTargetWidth>
+          <Dropdown target={<Textfield {...inputProps}/>} offset={dropdownOffset} useTargetWidth>
             <OptionList value={value} onItemClick={this.onItemClick}>
               {children}
             </OptionList>
           </Dropdown>}
+
+        {!readOnly &&
+          <i className={classnames({
+            'react-mdl-selectfield__arrow': true,
+            'react-mdl-selectfield__arrow--expanded': focused,
+          })}/>}
 
       </div>
     )

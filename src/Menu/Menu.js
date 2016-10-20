@@ -28,9 +28,9 @@ export default class Menu extends Component {
 
   render() {
     const { children, className, target, ...rest } = this.props
-    const portalClass = classnames('react-mdl-menu', className)
+    const dropdownClass = classnames('react-mdl-menu', className)
     return (
-      <Dropdown className={portalClass} target={target} {...rest}>
+      <Dropdown className={dropdownClass} target={target} {...rest}>
         <MenuList>
           {children}
         </MenuList>

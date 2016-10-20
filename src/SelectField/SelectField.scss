@@ -22,11 +22,19 @@
   .react-mdl-selectfield__arrow {
     cursor: pointer;
     position: absolute;
-    font-size: 20px;
-    line-height: 27px;
-    top: 20px;
-    right: 0px;
-    color: #ccc;
+    top: 50%;
+    right: 10px;
+    margin: -2px 0 0 -4px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
+
+    &.react-mdl-selectfield__arrow--expanded {
+      border-width: 0 4px 4px 4px;
+      border-color: transparent transparent rgba(0, 0, 0, 0.26) transparent;
+    }
   }
 
 }

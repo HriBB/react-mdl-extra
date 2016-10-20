@@ -28,7 +28,7 @@ export default class Option extends Component {
   onClick() {
     const { closeMenu, onClick, value } = this.props
     if (onClick) onClick(value)
-    closeMenu()
+    setTimeout(closeMenu, 1)
   }
 
   onKeyDown(e) {

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
+import classnames from 'classnames'
 
 import './MenuItem.scss'
 
@@ -17,7 +18,7 @@ export default class MenuItem extends Component {
   onClick = () => {
     const { closeMenu, onClick } = this.props
     if (onClick) onClick(this.props)
-    closeMenu()
+    setTimeout(closeMenu, 10)
   }
 
   onKeyDown = (e) => {
@@ -38,9 +39,10 @@ export default class MenuItem extends Component {
   }
 
   render() {
-    const { children, tabIndex } = this.props
+    const { children, className, tabIndex } = this.props
+    const itemClass = classnames('react-mdl-menu__item', className)
     return (
-      <li className={'react-mdl-menu__item'} tabIndex={tabIndex} onClick={this.onClick} onKeyDown={this.onKeyDown}>
+      <li className={itemClass} tabIndex={tabIndex} onClick={this.onClick} onKeyDown={this.onKeyDown}>
         {children}
       </li>
     )

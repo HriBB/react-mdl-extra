@@ -25,30 +25,44 @@ export default class MultiSelectField extends Component {
 
   constructor(props) {
     super(props)
+    this.state = { focused: false }
     this.onItemClick = this.onItemClick.bind(this)
     this.onTextfieldFocus = this.onTextfieldFocus.bind(this)
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
+    this.onChipClose = this.onChipClose.bind(this)
   }
 
   getInputNode() {
     return this.input.refs.input
   }
 
-  onItemClick(newValue) {
+  onItemClick(val) {
     const { value, onChange } = this.props
-    if (value !== newValue) {
-      if (onChange) onChange(newValue)
+    if (value.indexOf(val) === -1) {
+      if (onChange) onChange([...value,val])
     }
   }
 
   onTextfieldFocus() {
+    console.log('onFocus');
     const { value, onFocus } = this.props
+    this.setState({ focused: true })
     if (onFocus) onFocus(value)
   }
 
   onTextfieldBlur() {
+    console.log('onBlur');
     const { value, onBlur } = this.props
+    this.setState({ focused: false })
     if (onBlur) onBlur(value)
+  }
+
+  onChipClose(val) {
+    const { value, onChange } = this.props
+    const index = value.indexOf(val)
+    if (index > -1) {
+      if (onChange) onChange([...value.slice(0,index), ...value.slice(index+1)])
+    }
   }
 
   render() {
@@ -56,21 +70,17 @@ export default class MultiSelectField extends Component {
       className, error, floatingLabel, label, showMenuBelow, readOnly, value,
     } = this.props
 
-    const children = Children.toArray(this.props.children)
+    const { focused } = this.state
 
-    const mainClass = classnames('react-mdl-multiselectfield', {
-      'react-mdl-multiselectfield--error': error,
-    }, className)
+    const allChildren = Children
+      .toArray(this.props.children)
 
-    const chips = children
-      .filter(c => value.indexOf(c.props.value) > -1)
+    const children = allChildren
+      .filter(c => value && value.indexOf(c.props.value) === -1)
+
+    const chips = allChildren
+      .filter(c => value && value.indexOf(c.props.value) > -1)
       .map(c => ({ value: c.props.value, text: c.props.children }))
-
-    /*
-    const isValue = value !== undefined && value !== null && value !== ''
-    const index = isValue && children.findIndex(c => c.props.value === value)
-    const inputValue = isValue && index > -1 ? children[index].props.children : ''
-    */
 
     const inputProps = {
       type: 'text',
@@ -78,34 +88,54 @@ export default class MultiSelectField extends Component {
       readOnly: true,
       ref: ref => this.input = ref,
     }
-
-    console.log('value', value);
-    console.log('chips', chips);
-
-    /*
     if (!readOnly) {
       inputProps.onMouseDown = this.onTextfieldMouseDown
       inputProps.onFocus = this.onTextfieldFocus
       inputProps.onBlur = this.onTextfieldBlur
     }
 
-    const offset = showMenuBelow ? [0, -20] : [0, -49]
-    */
+    const mainClass = classnames({
+      'mdl-multiselect': true,
+      'mdl-multiselect--error': error,
+      'mdl-multiselect--focused': focused,
+    }, className)
+
+    const containerClass = 'mdl-multiselect__container'
+
+    const input = (
+      <div className={'mdl-multiselect__textfield'}>
+        <input className={'mdl-multiselect__input'} {...inputProps}/>
+        <label className={'mdl-multiselect__label'}>{label}</label>
+        <i className={'mdl-multiselect__arrow'}/>
+      </div>
+    )
+
+    const dropdownProps = {
+      target: input,
+      useTargetWidth: true,
+      offset: [0, -38],
+      targetNode: this.container,
+    }
 
     return (
       <div className={mainClass}>
 
-        <div className={''}>
+        <div className={containerClass} ref={ref => this.container = ref}>
+
           {chips.map(c =>
-            <Chip key={c.value} onClose={e => console.log('close')}>{c.text}</Chip>
+            <Chip key={c.value} onClose={() => this.onChipClose(c.value)}>{c.text}</Chip>
           )}
-          <Dropdown target={<input {...inputProps}/>} offset={offset} useTargetWidth>
+
+          <Dropdown {...dropdownProps}>
             <OptionList value={value} onItemClick={this.onItemClick}>
               {children}
             </OptionList>
           </Dropdown>
 
         </div>
+
+        {error &&
+          <span className={'mdl-textfield__error'}>{error}</span>}
 
       </div>
     )

@@ -13,11 +13,13 @@ export default class OptionList extends Component {
     value: PropTypes.any,
   }
 
+  /*
   componentDidMount() {
     setTimeout(() => {
       this.list.firstChild.focus()
     }, 30)
   }
+  */
 
   render() {
     const { children, closePortal, className, onItemClick, value } = this.props

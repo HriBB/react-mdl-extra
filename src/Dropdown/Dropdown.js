@@ -16,6 +16,7 @@ export default class Dropdown extends Component {
     offset: PropTypes.array,
     padding: PropTypes.number,
     target: PropTypes.element.isRequired,
+    targetNode: PropTypes.any,
     useTargetWidth: PropTypes.bool,
     valign: PropTypes.oneOf(['bottom', 'top']),
   }
@@ -50,7 +51,7 @@ export default class Dropdown extends Component {
       scrollY,
     } = window
 
-    let targetNode = findDOMNode(this)
+    let targetNode = this.props.targetNode || findDOMNode(this)
     let target = targetNode.getBoundingClientRect()
     let portal = portalNode.getBoundingClientRect()
 
@@ -109,11 +110,12 @@ export default class Dropdown extends Component {
     }
 
     //
-    // apply constraint and recalculate portal box
+    // apply constraint and recalculate portal and target rect
     //
     if (constrain) {
       portalNode.firstChild.style.maxHeight = `${maxHeight}px`
       portal = portalNode.getBoundingClientRect()
+      target = targetNode.getBoundingClientRect()
     }
 
     //
