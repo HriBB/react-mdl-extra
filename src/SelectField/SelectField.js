@@ -10,17 +10,24 @@ import OptionList from './OptionList'
 export default class SelectField extends Component {
 
   static propTypes = {
+    align: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     floatingLabel: PropTypes.bool,
     label: PropTypes.string.isRequired,
+    offset: PropTypes.string,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     readOnly: PropTypes.bool,
     showMenuBelow: PropTypes.bool,
+    talign: PropTypes.string,
     value: PropTypes.any,
+  }
+
+  static defaultProps = {
+    offset: '-20px 0',
   }
 
   constructor(props) {
@@ -56,15 +63,18 @@ export default class SelectField extends Component {
 
   render() {
     const {
-      className, error, floatingLabel, label, showMenuBelow, readOnly, value,
+      align, className, error, floatingLabel, label,
+      offset, readOnly, talign, value,
     } = this.props
-    
+
     const { focused } = this.state
 
     const children = Children.toArray(this.props.children)
 
-    const mainClass = classnames('react-mdl-selectfield', {
-      'react-mdl-selectfield--error': error,
+    const mainClass = classnames({
+      'mdl-selectfield': true,
+      'mdl-selectfield--error': error,
+      'mdl-selectfield--focused': focused,
     }, className)
 
     const isValue = value !== undefined && value !== null && value !== ''
@@ -80,14 +90,19 @@ export default class SelectField extends Component {
       readOnly: true,
       ref: ref => this.input = ref,
     }
-
     if (!readOnly) {
       inputProps.onMouseDown = this.onTextfieldMouseDown
       inputProps.onFocus = this.onTextfieldFocus
       inputProps.onBlur = this.onTextfieldBlur
     }
 
-    const dropdownOffset = showMenuBelow ? [0, -20] : [0, -49]
+    const dropdownProps = {
+      align,
+      offset,
+      talign,
+      target: <Textfield {...inputProps}/>,
+      useTargetWidth: true,
+    }
 
     return (
       <div className={mainClass}>
@@ -96,17 +111,14 @@ export default class SelectField extends Component {
           <Textfield {...inputProps}/>}
 
         {!readOnly &&
-          <Dropdown target={<Textfield {...inputProps}/>} offset={dropdownOffset} useTargetWidth>
+          <Dropdown {...dropdownProps}>
             <OptionList value={value} onItemClick={this.onItemClick}>
               {children}
             </OptionList>
           </Dropdown>}
 
         {!readOnly &&
-          <i className={classnames({
-            'react-mdl-selectfield__arrow': true,
-            'react-mdl-selectfield__arrow--expanded': focused,
-          })}/>}
+          <i className={'mdl-selectfield__arrow'}/>}
 
       </div>
     )

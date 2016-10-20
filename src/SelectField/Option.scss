@@ -1,14 +1,14 @@
-.react-mdl-option {
+.mdl-option {
   cursor: pointer;
   height: 32px;
   line-height: 32px;
   padding: 0 16px;
 
-  &.react-mdl-option--selected {
+  &.mdl-option--selected {
     color: #ff4081;
   }
 
-  &.react-mdl-option--disabled {
+  &.mdl-option--disabled {
     color: #bbb;
     &:hover {
       background: #fff;

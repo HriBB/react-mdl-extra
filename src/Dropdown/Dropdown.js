@@ -2,54 +2,75 @@ import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import classnames from 'classnames'
 import Portal from 'react-portal'
+import Tether from 'tether'
 
 import './Dropdown.scss'
 
 export default class Dropdown extends Component {
 
   static propTypes = {
-    align: PropTypes.oneOf(['left', 'right']),
+    align: PropTypes.string,
     children: PropTypes.any.isRequired,
     className: PropTypes.string,
     closeOnEsc: PropTypes.bool,
     closeOnOutsideClick: PropTypes.bool,
-    offset: PropTypes.array,
-    padding: PropTypes.number,
+    offset: PropTypes.string,
     target: PropTypes.element.isRequired,
     targetNode: PropTypes.any,
     useTargetWidth: PropTypes.bool,
-    valign: PropTypes.oneOf(['bottom', 'top']),
+    talign: PropTypes.string,
   }
 
   static defaultProps = {
-    align: 'left',
+    align: 'top left',
     closeOnEsc: true,
     closeOnOutsideClick: true,
-    offset: [0, 0],
-    padding: 10,
-    valign: 'bottom',
+    offset: '0 0',
+    talign: 'top left',
   }
 
   constructor(props) {
     super(props)
-    this.show = this.show.bind(this)
+    this.tether = null
+    this.open = this.open.bind(this)
+    this.close = this.close.bind(this)
   }
 
-  show(portalNode) {
-    const {
-      align,
-      offset: [ offsetX, offsetY ],
-      padding,
-      useTargetWidth,
-      valign,
-    } = this.props
+  open(portalNode) {
+    const { align, offset, useTargetWidth, talign } = this.props
 
-    const {
-      innerWidth,
-      innerHeight,
-      scrollX,
-      scrollY,
-    } = window
+    // get target node
+    let targetNode = this.props.targetNode || findDOMNode(this)
+
+    // set portal max height
+    portalNode.firstChild.style.maxHeight = `${innerHeight}px`
+
+    // use target width
+    if (useTargetWidth) {
+      portalNode.style.width = `${targetNode.getBoundingClientRect().width}px`
+    }
+
+    const options = {
+      element: portalNode,
+      target: targetNode,
+      attachment: align,
+      targetAttachment: talign,
+      offset,
+      constraints: [{
+        to: 'window',
+        attachment: 'together',
+        pin: true
+      }]
+    }
+
+    if (!this.tether) {
+      this.tether = new Tether(options)
+    } else {
+      this.tether.enable()
+      this.tether.setOptions(options)
+    }
+
+    /*
 
     let targetNode = this.props.targetNode || findDOMNode(this)
     let target = targetNode.getBoundingClientRect()
@@ -163,18 +184,27 @@ export default class Dropdown extends Component {
       portalNode.style.transform = `scale3d(1, 1, 1)`
       portalNode.style.transition = `transform 0.2s ease`
     }, 20)
+
+    */
+  }
+
+  close() {
+    if (this.tether) {
+      this.tether.disable()
+    }
   }
 
   render() {
     const { children, className, closeOnEsc, closeOnOutsideClick, target } = this.props
-    const portalClass = classnames('react-mdl-dropdown', className)
+    const portalClass = classnames('mdl-dropdown', className)
     return (
       <Portal
         className={portalClass}
         openByClickOn={target}
         closeOnEsc={closeOnEsc}
         closeOnOutsideClick={closeOnOutsideClick}
-        onOpen={this.show}
+        onOpen={this.open}
+        onClose={this.close}
       >
         {children}
       </Portal>

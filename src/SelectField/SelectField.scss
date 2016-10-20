@@ -1,12 +1,6 @@
-.react-mdl-selectfield {
+.mdl-selectfield {
   position: relative;
   width: 300px;
-
-  &.react-mdl-selectfield--error {
-    .react-mdl-selectfield__arrow {
-      color: #d50000;
-    }
-  }
 
   .mdl-textfield {
     width: 100%;
@@ -19,7 +13,7 @@
     }
   }
 
-  .react-mdl-selectfield__arrow {
+  .mdl-selectfield__arrow {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -30,11 +24,29 @@
     border-style: solid;
     border-width: 4px 4px 0 4px;
     border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
+  }
 
-    &.react-mdl-selectfield__arrow--expanded {
+  &.mdl-selectfield--error {
+
+    .mdl-selectfield__arrow {
+      border-color: #d50000 transparent transparent transparent;
+    }
+  }
+
+  &.mdl-selectfield--focused {
+
+    .mdl-selectfield__arrow {
       border-width: 0 4px 4px 4px;
       border-color: transparent transparent rgba(0, 0, 0, 0.26) transparent;
     }
+
+    &.mdl-selectfield--error {
+
+      .mdl-selectfield__arrow {
+        border-color: transparent transparent #d50000 transparent;
+      }
+    }
+
   }
 
 }

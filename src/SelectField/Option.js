@@ -50,9 +50,9 @@ export default class Option extends Component {
 
   render() {
     const { children, className, disabled, selected, tabIndex } = this.props
-    const itemClass = classnames('react-mdl-option', className, {
-      'react-mdl-option--selected': selected,
-      'react-mdl-option--disabled': disabled,
+    const itemClass = classnames('mdl-option', className, {
+      'mdl-option--selected': selected,
+      'mdl-option--disabled': disabled,
     })
     return (
       <li

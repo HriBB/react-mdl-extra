@@ -18,11 +18,13 @@ export default class StatefulSelectField extends Component {
   }
 
   render() {
-    const { children, value, ...props } = this.props
+    const { children, required, value, ...props } = this.props
     const val = this.state.value || value
+    const error = required && !(val && val.length) && 'Required'
     return (
       <SelectField
         {...props}
+        error={error}
         value={val}
         onChange={this.onChange}
       >

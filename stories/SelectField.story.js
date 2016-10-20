@@ -91,7 +91,7 @@ storiesOf('SelectField', module)
     </StatefulSelectField>
   ))
   .add('error', () => (
-    <StatefulSelectField label={'Select me'} error={'Invalid value!'}>
+    <StatefulSelectField label={'Select me'} required>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>

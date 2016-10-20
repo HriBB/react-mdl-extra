@@ -19,11 +19,13 @@ export default class StatefulMultiSelectField extends Component {
   }
 
   render() {
-    const { children, value, ...props } = this.props
+    const { children, required, value, ...props } = this.props
     const val = this.state.value || value || this.defaultValue
+    const error = required && !(val && val.length) && 'Required'
     return (
       <MultiSelectField
         {...props}
+        error={error}
         value={val}
         onChange={this.onChange}
       >

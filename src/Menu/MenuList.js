@@ -21,7 +21,7 @@ export default class MenuList extends Component {
 
   render() {
     const { closePortal, className } = this.props
-    const listClass = classnames('react-mdl-menu__list', className)
+    const listClass = classnames('mdl-portalmenu__list', className)
     const children = Children.toArray(this.props.children).filter(c => c)
     return (
       <ul className={listClass} ref={ref => this.list = ref}>

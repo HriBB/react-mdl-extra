@@ -13,17 +13,25 @@ export default class OptionList extends Component {
     value: PropTypes.any,
   }
 
-  /*
   componentDidMount() {
+    /*
     setTimeout(() => {
       this.list.firstChild.focus()
     }, 30)
+    */
+
+    const { value } = this.props
+    if (!value) return
+
+    const [ selected ] = this.list.getElementsByClassName('mdl-option--selected')
+    if (!selected) return
+
+    setTimeout(() => selected.scrollIntoView())
   }
-  */
 
   render() {
     const { children, closePortal, className, onItemClick, value } = this.props
-    const listClass = classnames('react-mdl-option__list', className)
+    const listClass = classnames('mdl-option__list', className)
     return (
       <ul className={listClass} ref={ref => this.list = ref}>
         {Children.map(children, (child, index) => cloneElement(child, {

@@ -44,7 +44,7 @@ storiesOf('MultiSelectField', module)
     </StatefulMultiSelectField>
   ))
   .add('error', () => (
-    <StatefulMultiSelectField label={'Select me many times'} error={'Invalid value!'}>
+    <StatefulMultiSelectField label={'Select me many times'} required>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>

@@ -40,7 +40,7 @@ export default class MenuItem extends Component {
 
   render() {
     const { children, className, tabIndex } = this.props
-    const itemClass = classnames('react-mdl-menu__item', className)
+    const itemClass = classnames('mdl-portalmenu__item', className)
     return (
       <li className={itemClass} tabIndex={tabIndex} onClick={this.onClick} onKeyDown={this.onKeyDown}>
         {children}

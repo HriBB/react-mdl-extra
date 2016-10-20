@@ -10,16 +10,18 @@ import OptionList from '../SelectField/OptionList'
 export default class MultiSelectField extends Component {
 
   static propTypes = {
+    align: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     floatingLabel: PropTypes.bool,
     label: PropTypes.string.isRequired,
+    offset: PropTypes.string,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     readOnly: PropTypes.bool,
-    showMenuBelow: PropTypes.bool,
+    talign: PropTypes.string,
     value: PropTypes.array,
   }
 
@@ -67,7 +69,8 @@ export default class MultiSelectField extends Component {
 
   render() {
     const {
-      className, error, floatingLabel, label, showMenuBelow, readOnly, value,
+      align, className, error, floatingLabel, label,
+      offset, readOnly, talign, value,
     } = this.props
 
     const { focused } = this.state
@@ -111,10 +114,12 @@ export default class MultiSelectField extends Component {
     )
 
     const dropdownProps = {
+      align,
+      offset,
+      talign,
       target: input,
-      useTargetWidth: true,
-      offset: [0, -38],
       targetNode: this.container,
+      useTargetWidth: true,
     }
 
     return (
