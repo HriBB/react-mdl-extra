@@ -40,6 +40,24 @@ render() {
 }
 ```
 
+### MultiSelectField
+
+```
+import { MultiSelectField, Option } from 'react-mdl-extra';
+
+render() {
+  return() (
+    <MultiSelectField label={'Select me many times'} value={[1,3]}>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </MultiSelectField>
+  );
+}
+```
+
 ### Menu
 
 ```
@@ -58,9 +76,11 @@ render() {
 
 ## TODO
 
-- [ ] Add key bindings
-- [ ] Fix focus handling
-- [ ] Create `MultiSelectField`
+- [x] Use Tether for dropdown positioning
+- [ ] Improve position handling
+- [x] Create `MultiSelectField`
 - [ ] Create `AutoCompleteField`
 - [ ] Create `DatePickerField`
+- [ ] Fix focus handling
+- [ ] Add key bindings
 - [ ] Add tests
