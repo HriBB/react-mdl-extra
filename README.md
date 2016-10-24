@@ -1,8 +1,8 @@
 # React-MDL SelectField
 
-Extra components for [React Material Design Lite](https://github.com/tleunen/react-mdl)
-Uses [react-portal](https://github.com/tajo/react-portal) to render to `body`, to prevent `overflow` issues.
-Uses [Tether](tether.io) for dropdown positioning.
+Extra components for [React Material Design Lite](https://github.com/tleunen/react-mdl).
+
+All components use a custom `Dropdown`, that uses [react-portal](https://github.com/tajo/react-portal) to render itself to document `body`, and [Tether](tether.io) for positioning.
 
 ## Installation
 
@@ -23,6 +23,18 @@ open http://localhost:9002/
 ```
 
 ## Usage
+
+### Dropdown
+
+```
+import { Dropdown } from 'react-mdl-extra';
+
+<Dropdown target={<Button>Open</Button>} align={'tl bl'} offset={'0 10px'}>
+  <div className={'custom-menu'}>
+    ...
+  </div>
+</Dropdown>
+```
 
 ### SelectField
 
