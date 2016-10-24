@@ -3,6 +3,9 @@
   height: 32px;
   line-height: 32px;
   padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.mdl-option--selected {
     color: #ff4081;

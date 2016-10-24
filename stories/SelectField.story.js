@@ -4,7 +4,7 @@ import faker from 'faker'
 
 import { SelectField, Option } from '../src'
 
-import StatefulSelectField from './StatefulSelectField'
+import StatefulSelectField from './helpers/StatefulSelectField'
 
 storiesOf('SelectField', module)
   .add('default', () => (

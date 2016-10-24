@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { SelectField } from '../src'
+import { SelectField } from '../../src'
 
 export default class StatefulSelectField extends Component {
 

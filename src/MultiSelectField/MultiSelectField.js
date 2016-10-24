@@ -6,11 +6,13 @@ import './MultiSelectField.scss'
 
 import Dropdown from '../Dropdown'
 import OptionList from '../SelectField/OptionList'
+import Option from '../SelectField/Option'
 
 export default class MultiSelectField extends Component {
 
   static propTypes = {
     align: PropTypes.string,
+    animate: PropTypes.bool,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
@@ -21,7 +23,6 @@ export default class MultiSelectField extends Component {
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     readOnly: PropTypes.bool,
-    talign: PropTypes.string,
     value: PropTypes.array,
   }
 
@@ -67,8 +68,8 @@ export default class MultiSelectField extends Component {
 
   render() {
     const {
-      align, className, error, label,
-      offset, readOnly, talign, value,
+      align, animate, className, error, label,
+      offset, readOnly, value,
     } = this.props
 
     const { focused } = this.state
@@ -78,6 +79,8 @@ export default class MultiSelectField extends Component {
 
     const children = allChildren
       .filter(c => value && value.indexOf(c.props.value) === -1)
+
+    const options = children.length ? children : <Option disabled>Empty</Option>
 
     const chips = allChildren
       .filter(c => value && value.indexOf(c.props.value) > -1)
@@ -113,8 +116,8 @@ export default class MultiSelectField extends Component {
 
     const dropdownProps = {
       align,
+      animate,
       offset,
-      talign,
       target: input,
       targetNode: this.container,
       useTargetWidth: true,
@@ -131,7 +134,7 @@ export default class MultiSelectField extends Component {
 
           <Dropdown {...dropdownProps}>
             <OptionList value={value} onItemClick={this.onItemClick}>
-              {children}
+              {options}
             </OptionList>
           </Dropdown>
 

@@ -10,7 +10,7 @@ export default class MenuItem extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
-    className: PropTypes.string.isRequired,
+    className: PropTypes.string,
     closeMenu: PropTypes.func,
     onClick: PropTypes.func,
     tabIndex: PropTypes.number,

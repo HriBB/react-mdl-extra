@@ -3,7 +3,8 @@ import { storiesOf, action } from '@kadira/storybook'
 import faker from 'faker'
 
 import { MultiSelectField, Option } from '../src'
-import StatefulMultiSelectField from './StatefulMultiSelectField'
+
+import StatefulMultiSelectField from './helpers/StatefulMultiSelectField'
 
 storiesOf('MultiSelectField', module)
   .add('default', () => (
@@ -16,7 +17,7 @@ storiesOf('MultiSelectField', module)
     </StatefulMultiSelectField>
   ))
   .add('preselected', () => (
-    <StatefulMultiSelectField label={'Select me many times'} value={[1,2]}>
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3,4]}>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>

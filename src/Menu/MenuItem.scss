@@ -3,6 +3,9 @@
   height: 48px;
   line-height: 48px;
   padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:first-child {
     margin-top: 5px;

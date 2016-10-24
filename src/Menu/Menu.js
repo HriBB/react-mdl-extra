@@ -10,12 +10,16 @@ export default class Menu extends Component {
 
   static propTypes = {
     align: PropTypes.string,
+    animate: PropTypes.bool,
     children: PropTypes.any.isRequired,
     className: PropTypes.string,
     offset: PropTypes.string,
     target: PropTypes.element.isRequired,
     useTargetWidth: PropTypes.bool,
-    talign: PropTypes.string,
+  }
+
+  static defaultProps = {
+    //align: 'tl bl',
   }
 
   render() {

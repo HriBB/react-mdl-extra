@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { MultiSelectField } from '../src'
+import { MultiSelectField } from '../../src'
 
 export default class StatefulMultiSelectField extends Component {
 

@@ -11,6 +11,7 @@ export default class SelectField extends Component {
 
   static propTypes = {
     align: PropTypes.string,
+    animate: PropTypes.bool,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
@@ -22,7 +23,6 @@ export default class SelectField extends Component {
     onChange: PropTypes.func,
     readOnly: PropTypes.bool,
     showMenuBelow: PropTypes.bool,
-    talign: PropTypes.string,
     value: PropTypes.any,
   }
 
@@ -63,8 +63,8 @@ export default class SelectField extends Component {
 
   render() {
     const {
-      align, className, error, floatingLabel, label,
-      offset, readOnly, talign, value,
+      align, animate, className, error, floatingLabel, label,
+      offset, readOnly, value,
     } = this.props
 
     const { focused } = this.state
@@ -98,8 +98,8 @@ export default class SelectField extends Component {
 
     const dropdownProps = {
       align,
+      animate,
       offset,
-      talign,
       target: <Textfield {...inputProps}/>,
       useTargetWidth: true,
     }

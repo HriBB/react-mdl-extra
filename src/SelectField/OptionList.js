@@ -26,7 +26,10 @@ export default class OptionList extends Component {
     const [ selected ] = this.list.getElementsByClassName('mdl-option--selected')
     if (!selected) return
 
-    setTimeout(() => selected.scrollIntoView())
+    setTimeout(() => {
+      selected.scrollIntoView()
+      this.list.scrollTop -= (this.list.getBoundingClientRect().height / 2) - 10;
+    })
   }
 
   render() {
