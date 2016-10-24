@@ -83,7 +83,7 @@ export default class Dropdown extends Component {
 
     // constrain portal height
     applyStyles(portalNode.firstChild, {
-      maxHeight: `${400}px`,
+      maxHeight: `${window.innerHeight}px`,
       minHeight: `${targetRect.height}px`,
     }, this._reactInternalInstance)
 
