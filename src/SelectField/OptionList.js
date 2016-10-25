@@ -14,22 +14,23 @@ export default class OptionList extends Component {
   }
 
   componentDidMount() {
-    /*
-    setTimeout(() => {
-      this.list.firstChild.focus()
-    }, 30)
-    */
-
     const { value } = this.props
     if (!value) return
 
     const [ selected ] = this.list.getElementsByClassName('mdl-option--selected')
     if (!selected) return
 
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
+      this.timeout = null
       selected.scrollIntoView()
       this.list.scrollTop -= (this.list.getBoundingClientRect().height / 2) - 10;
     })
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
   }
 
   render() {

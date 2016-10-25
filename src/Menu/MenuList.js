@@ -11,14 +11,6 @@ export default class MenuList extends Component {
     closePortal: PropTypes.func,
   }
 
-  /*
-  componentDidMount() {
-    setTimeout(() => {
-      this.list.firstChild.focus()
-    }, 30)
-  }
-  */
-
   render() {
     const { closePortal, className } = this.props
     const listClass = classnames('mdl-portalmenu__list', className)

@@ -28,7 +28,10 @@ export default class Option extends Component {
   onClick() {
     const { closeMenu, onClick, value } = this.props
     if (onClick) onClick(value)
-    setTimeout(closeMenu, 1)
+    this.timeout = setTimeout(() => {
+      this.timeout = null
+      closeMenu()
+    }, 1)
   }
 
   onKeyDown(e) {
@@ -45,6 +48,12 @@ export default class Option extends Component {
       e.stopPropagation()
       e.preventDefault()
       this.onClick()
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
     }
   }
 

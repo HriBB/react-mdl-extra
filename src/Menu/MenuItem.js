@@ -19,7 +19,10 @@ export default class MenuItem extends Component {
   onClick = () => {
     const { closeMenu, onClick } = this.props
     if (onClick) onClick(this.props)
-    setTimeout(closeMenu, 10)
+    this.timeout = setTimeout(() => {
+      this.timeout = null
+      closeMenu()
+    }, 1)
   }
 
   onKeyDown = (e) => {
@@ -36,6 +39,12 @@ export default class MenuItem extends Component {
       e.stopPropagation()
       e.preventDefault()
       this.onClick()
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
     }
   }
 

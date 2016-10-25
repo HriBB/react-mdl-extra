@@ -142,7 +142,8 @@ export default class Dropdown extends Component {
 
       applyStyles(portalNode, from, this._reactInternalInstance)
 
-      setTimeout(() => {
+      this.timeout = setTimeout(() => {
+        this.timeout = null
         applyStyles(portalNode, to, this._reactInternalInstance)
       }, 20)
     }
@@ -157,6 +158,9 @@ export default class Dropdown extends Component {
   componentWillUnmount() {
     if (this.tether) {
       this.tether.destroy()
+    }
+    if (this.timeout) {
+      clearTimeout(this.timeout)
     }
   }
 
