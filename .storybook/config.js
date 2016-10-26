@@ -9,6 +9,7 @@ function loadStories () {
   require('../stories/Menu.story');
   require('../stories/SelectField.story');
   require('../stories/MultiSelectField.story');
+  require('../stories/AutoComplete.story');
 }
 
 configure(loadStories, module);

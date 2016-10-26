@@ -1,6 +1,11 @@
-.mdl-selectfield {
+.mdl-autocomplete-dropdown {
+  max-height: 400px;
+}
+
+.mdl-autocomplete {
   position: relative;
   width: 300px;
+  max-height: 200px;
 
   .mdl-textfield {
     width: 100%;
@@ -11,7 +16,7 @@
     }
   }
 
-  .mdl-selectfield__arrow {
+  .mdl-autocomplete__arrow {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -23,19 +28,19 @@
     border-width: 4px 4px 0 4px;
     border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
   }
-  &.mdl-selectfield--error {
-    .mdl-selectfield__arrow {
+  &.mdl-autocomplete--error {
+    .mdl-autocomplete__arrow {
       border-color: #d50000 transparent transparent transparent;
     }
   }
-  &.mdl-selectfield--focused {
-    &:not(.mdl-selectfield--empty) {
-      .mdl-selectfield__arrow {
+  &.mdl-autocomplete--focused {
+    &:not(.mdl-autocomplete--empty) {
+      .mdl-autocomplete__arrow {
         border-width: 0 4px 4px 4px;
         border-color: transparent transparent rgba(0, 0, 0, 0.26) transparent;
       }
-      &.mdl-selectfield--error {
-        .mdl-selectfield__arrow {
+      &.mdl-autocomplete--error {
+        .mdl-autocomplete__arrow {
           border-color: transparent transparent #d50000 transparent;
         }
       }

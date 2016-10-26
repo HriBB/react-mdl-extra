@@ -18,7 +18,7 @@ export default class OptionList extends Component {
     const parent = this.list.parentNode
     if (parent.clientHeight >= parent.scrollHeight) return // no scroller
     const [ selected ] = this.list.getElementsByClassName('mdl-option--selected')
-    if (selected) selected.scrollIntoView()
+    parent.scrollTop = selected.offsetTop - (parent.clientHeight / 2)
   }
 
   render() {

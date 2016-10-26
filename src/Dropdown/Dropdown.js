@@ -35,7 +35,6 @@ export default class Dropdown extends Component {
         )
       }
     },
-    animate: PropTypes.bool,
     children: PropTypes.any.isRequired,
     className: PropTypes.string,
     closeOnEsc: PropTypes.bool,
@@ -45,11 +44,11 @@ export default class Dropdown extends Component {
     target: PropTypes.element.isRequired,
     targetNode: PropTypes.any,
     useTargetWidth: PropTypes.bool,
+    useTargetMinHeight: PropTypes.bool,
   }
 
   static defaultProps = {
     align: 'tl tl',
-    animate: false,
     closeOnEsc: true,
     closeOnOutsideClick: true,
     fade: true,
@@ -68,7 +67,7 @@ export default class Dropdown extends Component {
   }
 
   onOpen(portal) {
-    const { align, animate, fade, offset, useTargetWidth } = this.props
+    const { align, fade, offset, useTargetWidth, useTargetMinHeight } = this.props
 
     // get position
     const [ay,ax,ty,tx] = align.split('').map(a => a && POS[a]).filter(a => a)
@@ -84,7 +83,10 @@ export default class Dropdown extends Component {
       this.applyStyles(portal, { width: `${targetRect.width}px` })
     }
 
-    this.applyStyles(portal, { minHeight: `${targetRect.height}px` })
+    // apply min height to portal
+    if (useTargetMinHeight) {
+      this.applyStyles(portal, { minHeight: `${targetRect.height}px` })
+    }
 
     // tether
     this.tether = new Tether({

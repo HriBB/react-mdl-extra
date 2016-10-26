@@ -76,6 +76,25 @@ import { Menu, MenuItem } from 'react-mdl-extra';
 </Menu>
 ```
 
+### AutoComplete
+
+```
+import { AutoComplete } from 'react-mdl-extra';
+
+const items = [
+  { id: 1, name: 'Darth Vader' },
+  { id: 2, name: 'Luke Skywalker' },
+  { id: 3, name: 'Obi Wan Kenobi' },
+]
+
+<AutoComplete
+  label={'I will complete you'}
+  items={items}
+  valueIndex={'id'}
+  dataIndex={'name'}
+/>
+```
+
 ## Positioning Dropdown
 
 See [tether](http://tether.io/). Uses shorthand declaration. First two letter are the `attachment` property, followed by a space and second two letters, which are the `targetAttachment` property.
@@ -92,10 +111,11 @@ Attach **b**ottom **r**ight edge of the dropdown to the **t**op **r**ight edge o
 
 ## TODO
 
+- [ ] Improve styles
 - [ ] Remove sass dependency
 - [x] Improve position declaration
 - [x] Create `MultiSelectField`
-- [ ] Create `AutoCompleteField`
+- [x] Create `AutoCompleteField`
 - [ ] Create `DatePickerField`
 - [ ] Key and focus handling
 - [ ] Add tests

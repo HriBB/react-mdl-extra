@@ -1,21 +1,24 @@
-import React, { Component, Children, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Textfield } from 'react-mdl'
 import classnames from 'classnames'
 
-import './SelectField.scss'
+import './AutoComplete.scss'
 
 import Dropdown from '../Dropdown'
-import OptionList from './OptionList'
+import OptionList from '../SelectField/OptionList'
+import Option from '../SelectField/Option'
 
-export default class SelectField extends Component {
+export default class AutoComplete extends Component {
 
   static propTypes = {
     align: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.element),
     className: PropTypes.string,
+    dataIndex: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     floatingLabel: PropTypes.bool,
+    forceSelect: PropTypes.bool,
+    items: PropTypes.array.isRequired,
     label: PropTypes.string.isRequired,
     offset: PropTypes.string,
     onFocus: PropTypes.func,
@@ -24,24 +27,37 @@ export default class SelectField extends Component {
     readOnly: PropTypes.bool,
     showMenuBelow: PropTypes.bool,
     value: PropTypes.any,
+    valueIndex: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
-    offset: '-20px 0',
+    align: 'tl bl',
+    offset: '20px 0',
   }
 
   constructor(props) {
     super(props)
-    this.state = { focused: false }
+    this.state = { value: null, focused: false }
     this.onItemClick = this.onItemClick.bind(this)
+    this.onTextfieldChange = this.onTextfieldChange.bind(this)
     this.onTextfieldFocus = this.onTextfieldFocus.bind(this)
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
   }
 
   onItemClick(newValue) {
     const { value, onChange } = this.props
-    if (value !== newValue) {
-      if (onChange) onChange(newValue)
+    this.setState({ value: null })
+    if (value !== newValue && onChange) {
+      onChange(newValue)
+    }
+  }
+
+  onTextfieldChange(e) {
+    const { forceSelect, onChange } = this.props
+    const value = e.target.value
+    this.setState({ value })
+    if (!forceSelect && onChange) {
+      onChange(value)
     }
   }
 
@@ -59,26 +75,43 @@ export default class SelectField extends Component {
 
   render() {
     const {
-      align, className, disabled, error, floatingLabel, label,
-      offset, readOnly, value,
+      align, className, dataIndex, disabled, error, floatingLabel, items,
+      label, offset, readOnly, value, valueIndex,
     } = this.props
-    const { focused } = this.state
+    const { focused, value: stateValue } = this.state
 
-    const children = Children.toArray(this.props.children)
+    console.log('items', items);
+
+    const filtered = stateValue
+      ? items.filter(i => i[dataIndex].match(stateValue, 'gi'))
+      : items
+
+    const children = filtered.map(item => {
+      const value = item[valueIndex]
+      const data = item[dataIndex]
+      return <Option key={value} value={value}>{data}</Option>
+    })
+
+    console.log('children', items);
+
     const empty = !children.length
 
-    const isValue = value !== undefined && value !== null && value !== ''
-    const index = isValue && children.findIndex(c => c.props.value === value)
-    const inputValue = isValue && index > -1 ? children[index].props.children : ''
+    const item = items.find(item => item[valueIndex] === value)
+    const data = item && item[dataIndex] || ''
+
+    const inputValue = typeof stateValue === 'string'
+      ? stateValue
+      : data
 
     const inputProps = {
       disabled,
       error,
       floatingLabel,
       label,
-      readOnly: true,
+      readOnly: disabled,
       ref: ref => this.input = ref,
       type: 'text',
+      onChange: this.onTextfieldChange,
       value: inputValue,
     }
     if (!readOnly) {
@@ -87,28 +120,29 @@ export default class SelectField extends Component {
     }
 
     const mainClass = classnames({
-      'mdl-selectfield': true,
-      'mdl-selectfield--disabled': disabled,
-      'mdl-selectfield--empty': empty,
-      'mdl-selectfield--error': error,
-      'mdl-selectfield--focused': focused,
+      'mdl-autocomplete': true,
+      'mdl-autocomplete': true,
+      'mdl-autocomplete--disabled': disabled,
+      'mdl-autocomplete--empty': empty,
+      'mdl-autocomplete--error': error,
+      'mdl-autocomplete--focused': focused,
     }, className)
 
     if (disabled || readOnly || empty) {
       return (
         <div className={mainClass}>
           <Textfield {...inputProps}/>
-          <i className={'mdl-selectfield__arrow'}/>
+          <i className={'mdl-autocomplete__arrow'}/>
         </div>
       )
     }
 
     const dropdownProps = {
       align,
-      className: 'mdl-selectfield-dropdown',
       offset,
       target: <Textfield {...inputProps}/>,
       useTargetWidth: true,
+      className: 'mdl-autocomplete-dropdown',
     }
 
     return (
@@ -118,7 +152,7 @@ export default class SelectField extends Component {
             {children}
           </OptionList>
         </Dropdown>
-        <i className={'mdl-selectfield__arrow'}/>
+        <i className={'mdl-autocomplete__arrow'}/>
       </div>
     )
   }

@@ -12,7 +12,6 @@ export default class MultiSelectField extends Component {
 
   static propTypes = {
     align: PropTypes.string,
-    animate: PropTypes.bool,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
@@ -34,10 +33,6 @@ export default class MultiSelectField extends Component {
     this.onTextfieldFocus = this.onTextfieldFocus.bind(this)
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
     this.onChipClose = this.onChipClose.bind(this)
-  }
-
-  getInputNode() {
-    return this.input.refs.input
   }
 
   onItemClick(val) {
@@ -69,8 +64,7 @@ export default class MultiSelectField extends Component {
 
   render() {
     const {
-      align, animate, className, error, label,
-      offset, readOnly, showChipsBelow, value,
+      align, className, error, label, offset, readOnly, showChipsBelow, value,
     } = this.props
 
     const { focused } = this.state
@@ -99,15 +93,6 @@ export default class MultiSelectField extends Component {
       inputProps.onBlur = this.onTextfieldBlur
     }
 
-    const mainClass = classnames({
-      'mdl-multiselect': true,
-      'mdl-multiselect--error': error,
-      'mdl-multiselect--focused': focused,
-      'mdl-multiselect--below': showChipsBelow,
-    }, className)
-
-    const containerClass = 'mdl-multiselect__container'
-
     const input = (
       <div className={'mdl-multiselect__textfield'}>
         <input className={'mdl-multiselect__input'} {...inputProps}/>
@@ -118,12 +103,22 @@ export default class MultiSelectField extends Component {
 
     const dropdownProps = {
       align,
-      animate,
+      className: 'mdl-multiselect-dropdown',
       offset,
       target: input,
       targetNode: this.container,
       useTargetWidth: true,
+      useTargetMinHeight: !showChipsBelow,
     }
+
+    const mainClass = classnames({
+      'mdl-multiselect': true,
+      'mdl-multiselect--error': error,
+      'mdl-multiselect--focused': focused,
+      'mdl-multiselect--below': showChipsBelow,
+    }, className)
+
+    const containerClass = 'mdl-multiselect__container'
 
     return (
       <div className={mainClass}>
