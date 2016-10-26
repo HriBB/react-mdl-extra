@@ -80,8 +80,6 @@ export default class AutoComplete extends Component {
     } = this.props
     const { focused, value: stateValue } = this.state
 
-    console.log('items', items);
-
     const filtered = stateValue
       ? items.filter(i => i[dataIndex].match(stateValue, 'gi'))
       : items
@@ -91,8 +89,6 @@ export default class AutoComplete extends Component {
       const data = item[dataIndex]
       return <Option key={value} value={value}>{data}</Option>
     })
-
-    console.log('children', items);
 
     const empty = !children.length
 
@@ -120,7 +116,6 @@ export default class AutoComplete extends Component {
     }
 
     const mainClass = classnames({
-      'mdl-autocomplete': true,
       'mdl-autocomplete': true,
       'mdl-autocomplete--disabled': disabled,
       'mdl-autocomplete--empty': empty,

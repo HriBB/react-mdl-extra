@@ -4,7 +4,6 @@ import { findDOMNode } from 'react-dom'
 import classnames from 'classnames'
 import Portal from 'react-portal'
 import Tether from 'tether'
-import Popper from 'popper.js'
 
 import './Dropdown.scss'
 
@@ -39,7 +38,6 @@ export default class Dropdown extends Component {
     className: PropTypes.string,
     closeOnEsc: PropTypes.bool,
     closeOnOutsideClick: PropTypes.bool,
-    fade: PropTypes.bool,
     offset: PropTypes.string,
     target: PropTypes.element.isRequired,
     targetNode: PropTypes.any,
@@ -51,7 +49,6 @@ export default class Dropdown extends Component {
     align: 'tl tl',
     closeOnEsc: true,
     closeOnOutsideClick: true,
-    fade: true,
     offset: '0 0',
   }
 
@@ -67,7 +64,7 @@ export default class Dropdown extends Component {
   }
 
   onOpen(portal) {
-    const { align, fade, offset, useTargetWidth, useTargetMinHeight } = this.props
+    const { align, offset, useTargetWidth, useTargetMinHeight } = this.props
 
     // get position
     const [ay,ax,ty,tx] = align.split('').map(a => a && POS[a]).filter(a => a)
