@@ -14,23 +14,11 @@ export default class OptionList extends Component {
   }
 
   componentDidMount() {
-    const { value } = this.props
-    if (!value) return
-
+    if (!this.props.value) return // no value
+    const parent = this.list.parentNode
+    if (parent.clientHeight >= parent.scrollHeight) return // no scroller
     const [ selected ] = this.list.getElementsByClassName('mdl-option--selected')
-    if (!selected) return
-
-    this.timeout = setTimeout(() => {
-      this.timeout = null
-      selected.scrollIntoView()
-      this.list.scrollTop -= (this.list.getBoundingClientRect().height / 2) - 10;
-    })
-  }
-
-  componentWillUnmount() {
-    if (this.timeout) {
-      clearTimeout(this.timeout)
-    }
+    if (selected) selected.scrollIntoView()
   }
 
   render() {

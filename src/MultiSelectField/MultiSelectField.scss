@@ -80,6 +80,13 @@
     border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
   }
 
+  &.mdl-multiselect--below {
+    .mdl-multiselect__textfield {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+
   &.mdl-multiselect--focused {
 
     .mdl-multiselect__container {

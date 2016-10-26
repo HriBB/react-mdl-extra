@@ -89,6 +89,7 @@
   "dependencies": {
     "@kadira/storybook-deployer": "^1.2.0",
     "classnames": "^2.2.5",
+    "popper.js": "^0.6.4",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mdl": "^1.7.2",

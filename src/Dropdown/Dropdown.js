@@ -4,6 +4,7 @@ import { findDOMNode } from 'react-dom'
 import classnames from 'classnames'
 import Portal from 'react-portal'
 import Tether from 'tether'
+import Popper from 'popper.js'
 
 import './Dropdown.scss'
 
@@ -58,110 +59,59 @@ export default class Dropdown extends Component {
   constructor(props) {
     super(props)
     this.tether = null
-    this.open = this.open.bind(this)
-    this.close = this.close.bind(this)
+    this.onOpen = this.onOpen.bind(this)
+    this.beforeClose = this.beforeClose.bind(this)
   }
 
-  open(portalNode) {
-    const { align, animate, fade, offset, useTargetWidth } = this.props
+  applyStyles(node, styles) {
+    applyStyles(node, styles, this._reactInternalInstance)
+  }
 
-    // get target node
-    const targetNode = this.props.targetNode || findDOMNode(this)
-    const targetRect = targetNode.getBoundingClientRect()
+  onOpen(portal) {
+    const { align, animate, fade, offset, useTargetWidth } = this.props
 
     // get position
     const [ay,ax,ty,tx] = align.split('').map(a => a && POS[a]).filter(a => a)
     const attachment = `${ay} ${ax}`
     const targetAttachment = `${ty} ${tx}`
 
+    // get target node
+    const target = this.props.targetNode || findDOMNode(this)
+    const targetRect = target.getBoundingClientRect()
+
     // use target width
     if (useTargetWidth) {
-      applyStyles(portalNode, {
-        width: `${targetRect.width}px`,
-      }, this._reactInternalInstance)
+      this.applyStyles(portal, { width: `${targetRect.width}px` })
     }
 
-    // constrain portal height
-    applyStyles(portalNode.firstChild, {
-      maxHeight: `${window.innerHeight}px`,
-      minHeight: `${targetRect.height}px`,
-    }, this._reactInternalInstance)
+    this.applyStyles(portal, { minHeight: `${targetRect.height}px` })
 
-    // tether options
-    const options = {
-      element: portalNode,
-      target: targetNode,
+    // tether
+    this.tether = new Tether({
+      element: portal,
+      target: target,
       attachment,
       targetAttachment,
       offset,
       constraints: [{
         to: 'window',
-        attachment: 'together together',
+        attachment: 'together',
         pin: true,
       }],
-    }
-
-    // run tether
-    if (!this.tether) {
-      this.tether = new Tether(options)
-    } else {
-      this.tether.setOptions(options)
-    }
+    })
 
     // fade in
-    if (fade) {
-      applyStyles(portalNode, {
-        opacity: `1`,
-        transition: `opacity .3s cubic-bezier(0.25,0.8,0.25,1)`
-      }, this._reactInternalInstance)
-    }
-
-    // run animation
-    if (animate) {
-      const transform = portalNode.style.transform
-
-      const prect = portalNode.getBoundingClientRect()
-      const trect = targetNode.getBoundingClientRect()
-
-      const fixLeft  = ax === 'left' && tx === 'left' && prect.left + 1 < trect.left
-      const fixRight = ax === 'right' && tx === 'right' && trect.right + 1 < prect.right
-
-      const originX = prect.bottom + 1 <= trect.top ? 'bottom': 'top'
-      const originY = fixLeft && 'right' || fixRight && 'left' || ax
-
-      const from = {
-        transform: `${transform} scale(0.01, 0.01)`,
-        transformOrigin: `${originX} ${originY}`
-      }
-
-      const to = {
-        opacity: `1`,
-        transform: `${transform} scale(1, 1)`,
-        transition: `transform .2s cubic-bezier(0.25,0.8,0.25,1)`
-      }
-
-      applyStyles(portalNode, from, this._reactInternalInstance)
-
-      this.timeout = setTimeout(() => {
-        this.timeout = null
-        applyStyles(portalNode, to, this._reactInternalInstance)
-      }, 20)
-    }
+    this.applyStyles(portal, {
+      opacity: `1`,
+      transition: `opacity .3s cubic-bezier(0.25,0.8,0.25,1)`
+    })
   }
 
-  close() {
-    if (this.tether) {
-      this.tether.disable()
-    }
-  }
-
-  componentWillUnmount() {
+  beforeClose(portal, remove) {
     if (this.tether) {
       this.tether.destroy()
     }
-    if (this.timeout) {
-      clearTimeout(this.timeout)
-    }
+    setTimeout(remove, 10)
   }
 
   render() {
@@ -173,8 +123,8 @@ export default class Dropdown extends Component {
         closeOnEsc={closeOnEsc}
         closeOnOutsideClick={closeOnOutsideClick}
         openByClickOn={target}
-        onOpen={this.open}
-        onClose={this.close}
+        onOpen={this.onOpen}
+        beforeClose={this.beforeClose}
       >
         {children}
       </Portal>

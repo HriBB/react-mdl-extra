@@ -34,6 +34,10 @@ storiesOf('SelectField', module)
       <Option value={5}>Five</Option>
     </StatefulSelectField>
   ))
+  .add('empty', () => (
+    <StatefulSelectField label={'Select me'}>
+    </StatefulSelectField>
+  ))
   .add('zero value', () => (
     <StatefulSelectField label={'Select me'} value={0}>
       <Option value={0}>Zero</Option>
@@ -54,7 +58,7 @@ storiesOf('SelectField', module)
     </StatefulSelectField>
   ))
   .add('show menu below', () => (
-    <StatefulSelectField label={'Select me'} value={1} showMenuBelow>
+    <StatefulSelectField label={'Select me'} value={1} offset={'-47px 0'}>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>
@@ -64,6 +68,15 @@ storiesOf('SelectField', module)
   ))
   .add('read only', () => (
     <StatefulSelectField label={'Select me'} value={3} readOnly>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </StatefulSelectField>
+  ))
+  .add('disabled', () => (
+    <StatefulSelectField label={'Select me'} value={3} disabled>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>
@@ -82,7 +95,7 @@ storiesOf('SelectField', module)
     </StatefulSelectField>
   ))
   .add('lots of values', () => (
-    <StatefulSelectField label={'Select me'} editable>
+    <StatefulSelectField label={'Select me'} editable value={33}>
       {[...Array(45).keys()].map(i =>
         <Option key={i} value={i}>
           {`${faker.name.firstName()} ${faker.name.lastName()}`}

@@ -23,6 +23,7 @@ export default class MultiSelectField extends Component {
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     readOnly: PropTypes.bool,
+    showChipsBelow: PropTypes.bool,
     value: PropTypes.array,
   }
 
@@ -69,7 +70,7 @@ export default class MultiSelectField extends Component {
   render() {
     const {
       align, animate, className, error, label,
-      offset, readOnly, value,
+      offset, readOnly, showChipsBelow, value,
     } = this.props
 
     const { focused } = this.state
@@ -102,6 +103,7 @@ export default class MultiSelectField extends Component {
       'mdl-multiselect': true,
       'mdl-multiselect--error': error,
       'mdl-multiselect--focused': focused,
+      'mdl-multiselect--below': showChipsBelow,
     }, className)
 
     const containerClass = 'mdl-multiselect__container'
@@ -128,7 +130,7 @@ export default class MultiSelectField extends Component {
 
         <div className={containerClass} ref={ref => this.container = ref}>
 
-          {chips.map(c =>
+          {!showChipsBelow && chips.map(c =>
             <Chip key={c.value} onClose={() => this.onChipClose(c.value)}>{c.text}</Chip>
           )}
 
@@ -137,6 +139,10 @@ export default class MultiSelectField extends Component {
               {options}
             </OptionList>
           </Dropdown>
+
+          {showChipsBelow && chips.map(c =>
+            <Chip key={c.value} onClose={() => this.onChipClose(c.value)}>{c.text}</Chip>
+          )}
 
         </div>
 

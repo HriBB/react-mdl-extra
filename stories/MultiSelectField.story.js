@@ -17,7 +17,16 @@ storiesOf('MultiSelectField', module)
     </StatefulMultiSelectField>
   ))
   .add('preselected', () => (
-    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3,4]}>
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]}>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </StatefulMultiSelectField>
+  ))
+  .add('show chips below', () => (
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]} showChipsBelow>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>
@@ -27,6 +36,16 @@ storiesOf('MultiSelectField', module)
   ))
   .add('zero value', () => (
     <StatefulMultiSelectField label={'Select me many times'} value={[0]}>
+      <Option value={0}>Zero</Option>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </StatefulMultiSelectField>
+  ))
+  .add('change handler', () => (
+    <StatefulMultiSelectField label={'Select me many times'} onChange={val => console.log(val)}>
       <Option value={0}>Zero</Option>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
