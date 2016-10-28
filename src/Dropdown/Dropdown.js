@@ -110,7 +110,16 @@ export default class Dropdown extends Component {
     if (this.tether) {
       this.tether.destroy()
     }
-    setTimeout(remove, 10)
+    this.timeout = setTimeout(() => {
+      this.timeout = null
+      remove()
+    })
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
   }
 
   render() {
