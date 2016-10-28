@@ -48,7 +48,7 @@
     "react-mdl": "^1.7.2"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.24.1",
+    "@kadira/storybook": "^2.28.1",
     "autoprefixer": "^6.5.1",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
