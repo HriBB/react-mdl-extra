@@ -1,7 +1,10 @@
 .mdl-portalmenu__list {
   display: block;
+  flex: 1;
   width: 100%;
   min-width: 124px;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin: 0;
   padding: 0;
   list-style: none;

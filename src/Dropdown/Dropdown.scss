@@ -1,9 +1,7 @@
 
 .mdl-dropdown {
   position: absolute;
-  display: block;
-  overflow-x: hidden;
-  overflow-y: auto;
+  display: flex;
   z-index: 9999;
   max-height: 100%;
   opacity: 0;
