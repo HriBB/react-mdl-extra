@@ -1,3 +1,4 @@
+cp src/AutoComplete/AutoComplete.scss lib/AutoComplete/AutoComplete.scss
 cp src/Dropdown/Dropdown.scss lib/Dropdown/Dropdown.scss
 cp src/Menu/Menu.scss lib/Menu/Menu.scss
 cp src/Menu/MenuList.scss lib/Menu/MenuList.scss
