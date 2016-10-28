@@ -1,6 +1,8 @@
 import React, { Component, PropTypes, Children, cloneElement } from 'react'
 import classnames from 'classnames'
 
+import KEYCODE from '../keycodes'
+
 import './MenuList.scss'
 
 export default class MenuList extends Component {
@@ -9,6 +11,20 @@ export default class MenuList extends Component {
     children: PropTypes.any.isRequired,
     className: PropTypes.string,
     closePortal: PropTypes.func,
+  }
+
+  constructor(props) {
+    super(props)
+    this.keyDown = this.keyDown.bind(this)
+  }
+
+  keyDown(e) {
+    if (e.keyCode === KEYCODE.ESC) {
+      // prevent esc bubbling
+      e.preventDefault()
+      e.stopPropagation()
+      this.props.closePortal()
+    }
   }
 
   render() {

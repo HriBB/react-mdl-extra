@@ -111,8 +111,10 @@ Attach **b**ottom **r**ight edge of the dropdown to the **t**op **r**ight edge o
 
 ## TODO
 
-- [ ] Improve styles
-- [ ] Remove sass dependency
+- [ ] Split Dropdown into a separate component
+- [ ] Use native controls on mobile
+- [ ] Improve AutoComplete on mobile
+- [ ] Improve styles and remove sass
 - [x] Improve position declaration
 - [x] Create `MultiSelectField`
 - [x] Create `AutoCompleteField`
