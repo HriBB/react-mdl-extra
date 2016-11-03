@@ -108,7 +108,7 @@ export default class AutoComplete extends Component {
       ref: ref => this.input = ref,
       type: 'text',
       onChange: this.onTextfieldChange,
-      value: inputValue,
+      value: inputValue || "",
     }
     if (!readOnly) {
       inputProps.onFocus = this.onTextfieldFocus

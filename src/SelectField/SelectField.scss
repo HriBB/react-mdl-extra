@@ -12,6 +12,7 @@
   }
 
   .mdl-selectfield__arrow {
+    pointer-events: none;
     cursor: pointer;
     position: absolute;
     top: 50%;
