@@ -34,7 +34,7 @@ storiesOf('SelectField', module)
       <Option value={5}>Five</Option>
     </StatefulSelectField>
   ))
-  .add('empty', () => (
+  .add('empty option list', () => (
     <StatefulSelectField label={'Select me'}>
     </StatefulSelectField>
   ))
