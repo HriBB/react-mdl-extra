@@ -11,7 +11,10 @@ export default class SelectField extends Component {
 
   static propTypes = {
     align: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+    ]),
     className: PropTypes.string,
     disabled: PropTypes.bool,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
