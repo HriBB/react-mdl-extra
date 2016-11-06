@@ -32,14 +32,6 @@ storiesOf('AutoComplete', module)
       dataIndex={'name'}
     />
   ))
-  .add('itemFormatter', () => (
-    <StatefulAutoComplete
-      label={'I will complete you'}
-      items={items2}
-      valueIndex={'id'}
-      itemFormatter={(item, props) => `${item.firstName} ${item.lastName}`}
-    />
-  ))
   .add('change handler', () => (
     <StatefulAutoComplete
       label={'I will complete you'}

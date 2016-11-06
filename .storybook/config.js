@@ -1,6 +1,5 @@
 import { configure } from '@kadira/storybook';
 
-import 'normalize.css'
 import 'react-mdl/extra/material.js'
 import 'react-mdl/extra/material.css'
 import './storybook.scss'

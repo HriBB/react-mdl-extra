@@ -75,30 +75,35 @@ export default class AutoComplete extends Component {
 
   render() {
     const {
-      align, className, dataIndex, disabled, error, floatingLabel, items,
-      label, offset, readOnly, value, valueIndex,
+      align, className, dataIndex, disabled, error, floatingLabel,
+      items, label, offset, readOnly, value, valueIndex,
     } = this.props
     const { focused, value: stateValue } = this.state
 
-    const filtered = stateValue
-      ? items.filter(i => i[dataIndex].match(stateValue, 'gi'))
-      : items
+    // filter children
+    let filtered = items
+    if (stateValue) {
+      try {
+        const regex = new RegExp(stateValue, 'i')
+        filtered = items.filter(i => i[dataIndex].match(regex, 'g'))
+      } catch (e) {
+        filtered = []
+      }
+    }
 
+    // create options
     const children = filtered.map(item => {
       const value = item[valueIndex]
       const data = item[dataIndex]
       return <Option key={value} value={value}>{data}</Option>
     })
 
-    const empty = !children.length
-
+    // calculate input value
     const item = items.find(item => item[valueIndex] === value)
     const data = item && item[dataIndex] || ''
+    const inputValue = typeof stateValue === 'string' ? stateValue : data
 
-    const inputValue = typeof stateValue === 'string'
-      ? stateValue
-      : data
-
+    // calculate input props
     const inputProps = {
       disabled,
       error,
@@ -115,15 +120,16 @@ export default class AutoComplete extends Component {
       inputProps.onBlur = this.onTextfieldBlur
     }
 
+    // calculate main class
     const mainClass = classnames({
       'mdl-autocomplete': true,
       'mdl-autocomplete--disabled': disabled,
-      'mdl-autocomplete--empty': empty,
       'mdl-autocomplete--error': error,
       'mdl-autocomplete--focused': focused,
     }, className)
 
-    if (disabled || readOnly || empty) {
+    // render without dropdown
+    if (disabled || readOnly) {
       return (
         <div className={mainClass}>
           <Textfield {...inputProps}/>
@@ -132,6 +138,7 @@ export default class AutoComplete extends Component {
       )
     }
 
+    // calculate dropdown props
     const dropdownProps = {
       align,
       offset,
@@ -140,6 +147,7 @@ export default class AutoComplete extends Component {
       className: 'mdl-autocomplete-dropdown',
     }
 
+    // render with dropdown
     return (
       <div className={mainClass}>
         <Dropdown {...dropdownProps}>
