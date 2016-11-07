@@ -7,3 +7,4 @@ cp src/SelectField/SelectField.scss lib/SelectField/SelectField.scss
 cp src/SelectField/OptionList.scss lib/SelectField/OptionList.scss
 cp src/SelectField/Option.scss lib/SelectField/Option.scss
 cp src/MultiSelectField/MultiSelectField.scss lib/MultiSelectField/MultiSelectField.scss
+cp src/Stepper/Stepper.scss lib/Stepper/Stepper.scss
