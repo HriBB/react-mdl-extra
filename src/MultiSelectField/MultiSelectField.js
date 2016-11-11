@@ -14,6 +14,8 @@ export default class MultiSelectField extends Component {
     align: PropTypes.string,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
+    chipsAfter: PropTypes.bool,
+    chipsOutside: PropTypes.bool,
     error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     //floatingLabel: PropTypes.bool,
     label: PropTypes.string.isRequired,
@@ -33,6 +35,9 @@ export default class MultiSelectField extends Component {
     this.onTextfieldFocus = this.onTextfieldFocus.bind(this)
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
     this.onChipClose = this.onChipClose.bind(this)
+    if (props.showChipsBelow) {
+      console.warn('Prop "showChipsBelow" is deprecated! Use "chipsBelow" instead.')
+    }
   }
 
   onItemClick(val) {
@@ -64,7 +69,8 @@ export default class MultiSelectField extends Component {
 
   render() {
     const {
-      align, className, error, label, offset, readOnly, showChipsBelow, value,
+      align, className, chipsAfter, chipsOutside, showChipsBelow,
+      error, label, offset, readOnly, value,
     } = this.props
 
     const { focused } = this.state
@@ -79,7 +85,11 @@ export default class MultiSelectField extends Component {
 
     const chips = allChildren
       .filter(c => value && value.indexOf(c.props.value) > -1)
-      .map(c => ({ value: c.props.value, text: c.props.children }))
+      .map(({props}) => (
+        <Chip key={props.value} onClose={() => this.onChipClose(props.value)}>
+          {props.children}
+        </Chip>
+      ))
 
     const inputProps = {
       type: 'text',
@@ -108,26 +118,25 @@ export default class MultiSelectField extends Component {
       target: input,
       targetNode: this.container,
       useTargetWidth: true,
-      useTargetMinHeight: !showChipsBelow,
+      useTargetMinHeight: !chipsOutside,
     }
 
-    const mainClass = classnames({
-      'mdl-multiselect': true,
+    const mainClass = classnames('mdl-multiselect', {
       'mdl-multiselect--error': error,
       'mdl-multiselect--focused': focused,
-      'mdl-multiselect--below': showChipsBelow,
+      'mdl-multiselect--chips-after': chipsAfter,
+      'mdl-multiselect--chips-outside': chipsOutside,
     }, className)
-
-    const containerClass = 'mdl-multiselect__container'
 
     return (
       <div className={mainClass}>
 
-        <div className={containerClass} ref={ref => this.container = ref}>
+        {chipsOutside && !chipsAfter &&
+          <div className={'mdl-multiselect__chips'}>{chips}</div>}
 
-          {!showChipsBelow && chips.map(c =>
-            <Chip key={c.value} onClose={() => this.onChipClose(c.value)}>{c.text}</Chip>
-          )}
+        <div className={'mdl-multiselect__container'} ref={ref => this.container = ref}>
+
+          {!chipsOutside && !chipsAfter && chips}
 
           <Dropdown {...dropdownProps}>
             <OptionList value={value} onItemClick={this.onItemClick}>
@@ -135,14 +144,15 @@ export default class MultiSelectField extends Component {
             </OptionList>
           </Dropdown>
 
-          {showChipsBelow && chips.map(c =>
-            <Chip key={c.value} onClose={() => this.onChipClose(c.value)}>{c.text}</Chip>
-          )}
+          {!chipsOutside && chipsAfter && chips}
 
         </div>
 
         {error &&
           <span className={'mdl-textfield__error'}>{error}</span>}
+
+        {chipsOutside && chipsAfter &&
+          <div className={'mdl-multiselect__chips'}>{chips}</div>}
 
       </div>
     )

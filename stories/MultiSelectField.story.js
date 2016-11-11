@@ -25,8 +25,35 @@ storiesOf('MultiSelectField', module)
       <Option value={5}>Five</Option>
     </StatefulMultiSelectField>
   ))
-  .add('show chips below', () => (
-    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]} showChipsBelow>
+  .add('show chips inside before input (default)', () => (
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]}>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </StatefulMultiSelectField>
+  ))
+  .add('show chips inside after input', () => (
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]} chipsAfter>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </StatefulMultiSelectField>
+  ))
+  .add('show chips outside before input', () => (
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]} chipsOutside>
+      <Option value={1}>One</Option>
+      <Option value={2}>Two</Option>
+      <Option value={3}>Three</Option>
+      <Option value={4}>Four</Option>
+      <Option value={5}>Five</Option>
+    </StatefulMultiSelectField>
+  ))
+  .add('show chips outside after input', () => (
+    <StatefulMultiSelectField label={'Select me many times'} value={[1,2,3]} chipsOutside chipsAfter>
       <Option value={1}>One</Option>
       <Option value={2}>Two</Option>
       <Option value={3}>Three</Option>

@@ -81,10 +81,19 @@
     border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
   }
 
-  &.mdl-multiselect--below {
+  &.mdl-multiselect--chips-outside {
     .mdl-multiselect__textfield {
       width: 100%;
       min-width: 100%;
+    }
+    .mdl-multiselect__chips {
+      margin-bottom: 5px;
+    }
+    &.mdl-multiselect--chips-after {
+      .mdl-multiselect__chips {
+        margin-bottom: 0;
+        margin-top: 3px;
+      }
     }
   }
 
