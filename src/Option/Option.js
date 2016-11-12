@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import classnames from 'classnames'
 
-import './Option.scss'
-
 import KEYCODES from '../keycodes'
+
+import './Option.scss'
 
 export default class Option extends Component {
 

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
-import './Menu.scss'
-
 import Dropdown from '../Dropdown'
-import MenuList from './MenuList'
+import MenuList from '../MenuList'
+
+import './Menu.scss'
 
 export default class Menu extends Component {
 

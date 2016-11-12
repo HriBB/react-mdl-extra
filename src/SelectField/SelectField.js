@@ -2,10 +2,10 @@ import React, { Component, Children, PropTypes } from 'react'
 import { Textfield } from 'react-mdl'
 import classnames from 'classnames'
 
-import './SelectField.scss'
-
 import Dropdown from '../Dropdown'
-import OptionList from './OptionList'
+import OptionList from '../OptionList'
+
+import './SelectField.scss'
 
 export default class SelectField extends Component {
 

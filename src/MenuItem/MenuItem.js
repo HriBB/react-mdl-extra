@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import classnames from 'classnames'
 
-import './MenuItem.scss'
-
 import KEYCODES from '../keycodes'
+
+import './MenuItem.scss'
 
 export default class MenuItem extends Component {
 

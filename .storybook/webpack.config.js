@@ -5,13 +5,15 @@ module.exports = {
   module: {
     loaders: [{
       test  : /\.(scss|css)$/,
-      loader: 'style!css?sourceMap!postcss!sass?sourceMap'
+      loader: 'style!css?sourceMap!postcss!sass?sourceMap',
     },{
-      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "url-loader?limit=10000&mimetype=application/font-woff"
-    },{
-      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "file-loader"
+      test: /\.(png|jpg|svg|woff|woff2|eot|ttf)$/,
+      loader: 'url-loader?limit=100000',
     }]
-  }
+  },
+  postcss: function() {
+    return [
+      require('autoprefixer'),
+    ]
+  },
 };

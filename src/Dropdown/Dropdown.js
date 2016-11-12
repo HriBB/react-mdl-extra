@@ -63,9 +63,9 @@ export default class Dropdown extends Component {
     const {
       align,
       offset,
-      cssPadding, // padding for styles (needed if menu is out of bounds)
-      viewportPadding, // padding for viewport (needed if menu is out of bounds)
-      useTargetWidth, // dropdown will inherit target width
+      cssPadding,         // padding for styles (needed if menu is out of bounds)
+      viewportPadding,    // padding for viewport (needed if menu is out of bounds)
+      useTargetWidth,     // dropdown will inherit target width
       useTargetMinHeight, // dropdown will inherit target height as min-height
     } = this.props
 
@@ -75,19 +75,25 @@ export default class Dropdown extends Component {
     // parse offset
     let [oy,ox] = offset.split(' ').map(o => parseInt(o))
 
-    const { innerHeight, scrollTop } = window
-    const portalRect = portal.getBoundingClientRect()
+    // window is our boundary
+    const { innerHeight } = window
 
     // get target node
     const target = this.props.targetNode || findDOMNode(this)
-    let targetRect = target.getBoundingClientRect()
+
+    // get bounding rects
+    const portalRect = portal.getBoundingClientRect()
+    const targetRect = target.getBoundingClientRect()
 
     // calculate padding
     const padding = viewportPadding + cssPadding + oy
 
     // calculate space above and below target
     let spaceAbove, spaceBelow
-    if (ty === 'top') {
+    if (ty === 'middle') {
+      spaceAbove = targetRect.top + (targetRect.height / 2) - padding
+      spaceBelow = innerHeight - targetRect.bottom + (targetRect.height / 2) - padding
+    } else if (ty === 'top') {
       if (ay === 'top') {
         spaceAbove = targetRect.bottom - padding
         spaceBelow = innerHeight - targetRect.top - padding
@@ -107,32 +113,26 @@ export default class Dropdown extends Component {
 
     // calculate max height
     const maxHeight = Math.max(spaceAbove, spaceBelow)
-    const outOfBounds = portalRect.height > maxHeight
 
-    // portal is out of bounds
-    if (outOfBounds) {
+    // flip if neccesary
+    if (ay === 'top' && spaceAbove > spaceBelow) {
 
-      // flip if neccesary
-      if (ay === 'top' && spaceAbove > spaceBelow) {
+      // flip up
+      ay = 'bottom'
+      if (ty === 'top') {
+        ty = 'bottom'
+      } else {
+        ty = 'top'
+      }
 
-        // flip up
-        ay = 'bottom'
-        if (ty === 'top') {
-          ty = 'bottom'
-        } else {
-          ty = 'top'
-        }
+    } else if (ay === 'bottom' && spaceBelow > spaceAbove) {
 
-      } else if (ay === 'bottom' && spaceBelow > spaceAbove) {
-
-        // flip down
-        ay = 'top'
-        if (ty === 'top') {
-          ty = 'bottom'
-        } else {
-          ty = 'top'
-        }
-
+      // flip down
+      ay = 'top'
+      if (ty === 'top') {
+        ty = 'bottom'
+      } else {
+        ty = 'top'
       }
 
     }
@@ -167,7 +167,7 @@ export default class Dropdown extends Component {
     this.applyStyles(portal, { opacity: 1 })
 
     // force reposition
-    if (outOfBounds) {
+    if (portalRect.height > maxHeight) {
       this.tether.position()
     }
   }
@@ -200,9 +200,7 @@ export default class Dropdown extends Component {
         onOpen={this.onOpen}
         beforeClose={this.beforeClose}
       >
-        <div className={'mdl-dropdown__scroller'}>
-          {children}
-        </div>
+        {children}
       </Portal>
     )
   }

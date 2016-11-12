@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { Textfield } from 'react-mdl'
 import classnames from 'classnames'
 
-import './AutoComplete.scss'
-
 import Dropdown from '../Dropdown'
-import OptionList from '../SelectField/OptionList'
-import Option from '../SelectField/Option'
+import OptionList from '../OptionList'
+import Option from '../Option'
+
+import './AutoComplete.scss'
 
 export default class AutoComplete extends Component {
 

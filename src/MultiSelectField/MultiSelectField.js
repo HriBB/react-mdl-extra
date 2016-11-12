@@ -2,11 +2,11 @@ import React, { Component, Children, PropTypes } from 'react'
 import { Chip } from 'react-mdl'
 import classnames from 'classnames'
 
-import './MultiSelectField.scss'
-
 import Dropdown from '../Dropdown'
-import OptionList from '../SelectField/OptionList'
-import Option from '../SelectField/Option'
+import OptionList from '../OptionList'
+import Option from '../Option'
+
+import './MultiSelectField.scss'
 
 export default class MultiSelectField extends Component {
 

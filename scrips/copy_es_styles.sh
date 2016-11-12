@@ -1,10 +1,10 @@
 cp src/AutoComplete/AutoComplete.scss es/AutoComplete/AutoComplete.scss
 cp src/Dropdown/Dropdown.scss es/Dropdown/Dropdown.scss
 cp src/Menu/Menu.scss es/Menu/Menu.scss
-cp src/Menu/MenuList.scss es/Menu/MenuList.scss
-cp src/Menu/MenuItem.scss es/Menu/MenuItem.scss
+cp src/MenuList/MenuList.scss es/MenuList/MenuList.scss
+cp src/MenuItem/MenuItem.scss es/MenuItem/MenuItem.scss
 cp src/SelectField/SelectField.scss es/SelectField/SelectField.scss
-cp src/SelectField/OptionList.scss es/SelectField/OptionList.scss
-cp src/SelectField/Option.scss es/SelectField/Option.scss
+cp src/OptionList/OptionList.scss es/OptionList/OptionList.scss
+cp src/Option/Option.scss es/Option/Option.scss
 cp src/MultiSelectField/MultiSelectField.scss es/MultiSelectField/MultiSelectField.scss
 cp src/Stepper/Stepper.scss es/Stepper/Stepper.scss

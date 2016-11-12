@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { storiesOf, action } from '@kadira/storybook'
 import faker from 'faker'
 
-import { Button, IconButton } from 'react-mdl'
+import { Card, Button, IconButton } from 'react-mdl'
 
 import { Menu, MenuItem } from '../src'
 
@@ -139,8 +139,7 @@ storiesOf('Menu', module)
       center: { margin: '0 auto', textAlign: 'center' },
       info: { margin: '40px auto', maxWidth: '400px', lineHeight: '24px' },
       buttons: { margin: '300px 0 1000px 0' },
-      span: { display: 'inline-block', margin: '0 10px' },
-      button: { textTransform: 'none' },
+      button: { margin: '0 10px', textTransform: 'none' },
     }
     return (
       <div style={styles.center}>
@@ -150,89 +149,63 @@ storiesOf('Menu', module)
         </p>
         <div style={styles.buttons}>
           <p><b>Normal Menu</b></p>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
-              {smallMenuItems}
-            </Menu>
-          </span>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
-              {smallMenuItems}
-            </Menu>
-          </span>
+          <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
+            {smallMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
+            {smallMenuItems}
+          </Menu>
           <br /><br /><br />
           <p><b>Big Menu</b></p>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>tl tl</Button>} align={'tl tl'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>tr tr</Button>} align={'tr tr'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
+          <Menu target={<Button raised style={styles.button}>tl tl</Button>} align={'tl tl'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>tr tr</Button>} align={'tr tr'}>
+            {bigMenuItems}
+          </Menu>
           <br /><br /><br />
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>bl bl</Button>} align={'bl bl'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>br br</Button>} align={'br br'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
+          <Menu target={<Button raised style={styles.button}>bl bl</Button>} align={'bl bl'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>br br</Button>} align={'br br'}>
+            {bigMenuItems}
+          </Menu>
           <br /><br /><br />
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>tr br</Button>} align={'tr br'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
+          <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>tr br</Button>} align={'tr br'}>
+            {bigMenuItems}
+          </Menu>
           <br /><br /><br />
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'bl tl'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
-          <span style={styles.span}>
-            <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
-              {bigMenuItems}
-            </Menu>
-          </span>
+          <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'bl tl'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
+            {bigMenuItems}
+          </Menu>
           <br /><br /><br />
         </div>
       </div>
 
     )
   })
-  /*
   .add('parent with hidden overflow', () => {
     const styles = {
-      div: { margin: '0 auto', textAlign: 'center' },
-      card: { margin: '50px 0 0 0' },
-      image: { width: '240px' },
+      image: { width: '100%' },
+      icon: { position: 'absolute', top: '20px', right: '20px', color: '#fff' },
     }
     return (
-      <div style={styles.div}>
-        <Card style={styles.card}>
-          <Image style={styles.image} src={require('./fashion.jpg')} alt={''}>
-            <Menu target={<IconButton name={'more_vert'}/>}>
-              <MenuItem>One</MenuItem>
-              <MenuItem>Two</MenuItem>
-              <MenuItem>Three</MenuItem>
-              <MenuItem>I</MenuItem>
-              <MenuItem>Am</MenuItem>
-              <MenuItem>Free</MenuItem>
-            </Menu>
-          </Image>
+        <Card style={styles.card} shadow={0}>
+          <img style={styles.image} src={require('./helpers/fashion.jpg')} alt={''}/>
+          <Menu target={<IconButton style={styles.icon} name={'more_vert'}/>} align={'tr br'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+            <MenuItem>I</MenuItem>
+            <MenuItem>Am</MenuItem>
+            <MenuItem>Free</MenuItem>
+          </Menu>
         </Card>
-      </div>
     )
   })
-  */

@@ -1,4 +1,8 @@
 .mdl-portalmenu__list {
+  display: block;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
   min-width: 124px;
   margin: 0;
   padding: 0;
