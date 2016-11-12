@@ -6,6 +6,14 @@ import { Button, IconButton } from 'react-mdl'
 
 import { Menu, MenuItem } from '../src'
 
+const bigMenuItems = [...Array(35).keys()].map(i =>
+  <MenuItem key={i}>Menu Item {i}</MenuItem>
+)
+
+const smallMenuItems = [...Array(3).keys()].map(i =>
+  <MenuItem key={i}>Menu Item {i}</MenuItem>
+)
+
 storiesOf('Menu', module)
   .add('default', () => (
     <Menu target={<Button raised>Open menu</Button>} align={'tl bl'}>
@@ -131,7 +139,8 @@ storiesOf('Menu', module)
       center: { margin: '0 auto', textAlign: 'center' },
       info: { margin: '40px auto', maxWidth: '400px', lineHeight: '24px' },
       buttons: { margin: '300px 0 1000px 0' },
-      button: { margin: '0 10px', textTransform: 'none' },
+      span: { display: 'inline-block', margin: '0 10px' },
+      button: { textTransform: 'none' },
     }
     return (
       <div style={styles.center}>
@@ -141,28 +150,62 @@ storiesOf('Menu', module)
         </p>
         <div style={styles.buttons}>
           <p><b>Normal Menu</b></p>
-          <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'br tr'}>
-            {[...Array(3).keys()].map(i =>
-              <MenuItem key={i}>Menu Item {i}</MenuItem>
-            )}
-          </Menu>
-          <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
-            {[...Array(3).keys()].map(i =>
-              <MenuItem key={i}>Menu Item {i}</MenuItem>
-            )}
-          </Menu>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
+              {smallMenuItems}
+            </Menu>
+          </span>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
+              {smallMenuItems}
+            </Menu>
+          </span>
           <br /><br /><br />
           <p><b>Big Menu</b></p>
-          <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
-            {[...Array(35).keys()].map(i =>
-              <MenuItem key={i}>Menu Item {i}</MenuItem>
-            )}
-          </Menu>
-          <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
-            {[...Array(35).keys()].map(i =>
-              <MenuItem key={i}>Menu Item {i}</MenuItem>
-            )}
-          </Menu>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>tl tl</Button>} align={'tl tl'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>tr tr</Button>} align={'tr tr'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <br /><br /><br />
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>bl bl</Button>} align={'bl bl'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>br br</Button>} align={'br br'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <br /><br /><br />
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>tr br</Button>} align={'tr br'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <br /><br /><br />
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'bl tl'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <span style={styles.span}>
+            <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
+              {bigMenuItems}
+            </Menu>
+          </span>
+          <br /><br /><br />
         </div>
       </div>
 

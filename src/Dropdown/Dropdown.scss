@@ -1,13 +1,20 @@
-
 .mdl-dropdown {
   position: absolute;
   display: flex;
   z-index: 9999;
-  max-height: 100%;
   opacity: 0;
   margin: 0;
   padding: 5px 0;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+  transition: opacity .3s cubic-bezier(0.25,0.8,0.25,1);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),
+              0 3px 1px -2px rgba(0,0,0,.2),
+              0 1px 5px 0 rgba(0,0,0,.12);
+
+  .mdl-dropdown__scroller {
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }

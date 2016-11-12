@@ -7,11 +7,6 @@ import Tether from 'tether'
 
 import './Dropdown.scss'
 
-/**
- * Position shorthand refs
- *
- * @type {Object}
- */
 const POS = {
   t: 'top',
   b: 'bottom',
@@ -21,14 +16,11 @@ const POS = {
   c: 'center',
 }
 
-/**
- * Generic dropdown component
- */
 export default class Dropdown extends Component {
 
   static propTypes = {
     align: function(props, propName, componentName) {
-      if (!/[a-z][a-z]\ [a-z][a-z]/.test(props[propName])) {
+      if (!/[btm][lrc]\ [btm][lrc]/.test(props[propName])) {
         return new Error(
           `Invalid prop ${propName} (${props[propName]}) supplied to ${componentName}. Validation failed.`
         )
@@ -39,6 +31,8 @@ export default class Dropdown extends Component {
     closeOnEsc: PropTypes.bool,
     closeOnOutsideClick: PropTypes.bool,
     offset: PropTypes.string,
+    viewportPadding: PropTypes.number,
+    cssPadding: PropTypes.number,
     target: PropTypes.element.isRequired,
     targetNode: PropTypes.any,
     useTargetWidth: PropTypes.bool,
@@ -49,7 +43,9 @@ export default class Dropdown extends Component {
     align: 'tl tl',
     closeOnEsc: true,
     closeOnOutsideClick: true,
+    cssPadding: 10,
     offset: '0 0',
+    viewportPadding: 10,
   }
 
   constructor(props) {
@@ -64,23 +60,92 @@ export default class Dropdown extends Component {
   }
 
   onOpen(portal) {
-    const { align, offset, useTargetWidth, useTargetMinHeight } = this.props
+    const {
+      align,
+      offset,
+      cssPadding, // padding for styles (needed if menu is out of bounds)
+      viewportPadding, // padding for viewport (needed if menu is out of bounds)
+      useTargetWidth, // dropdown will inherit target width
+      useTargetMinHeight, // dropdown will inherit target height as min-height
+    } = this.props
 
-    // get position
-    const [ay,ax,ty,tx] = align.split('').map(a => a && POS[a]).filter(a => a)
-    const attachment = `${ay} ${ax}`
-    const targetAttachment = `${ty} ${tx}`
+    // parse position
+    let [ay,ax,ty,tx] = align.split('').map(a => a && POS[a]).filter(a => a)
+
+    // parse offset
+    let [oy,ox] = offset.split(' ').map(o => parseInt(o))
+
+    const { innerHeight, scrollTop } = window
+    const portalRect = portal.getBoundingClientRect()
 
     // get target node
     const target = this.props.targetNode || findDOMNode(this)
-    const targetRect = target.getBoundingClientRect()
+    let targetRect = target.getBoundingClientRect()
+
+    // calculate padding
+    const padding = viewportPadding + cssPadding + oy
+
+    // calculate space above and below target
+    let spaceAbove, spaceBelow
+    if (ty === 'top') {
+      if (ay === 'top') {
+        spaceAbove = targetRect.bottom - padding
+        spaceBelow = innerHeight - targetRect.top - padding
+      } else {
+        spaceAbove = targetRect.top - padding
+        spaceBelow = innerHeight - targetRect.bottom - padding
+      }
+    } else {
+      if (ay === 'top') {
+        spaceAbove = targetRect.top - padding
+        spaceBelow = innerHeight - targetRect.bottom - padding
+      } else {
+        spaceAbove = targetRect.bottom - padding
+        spaceBelow = innerHeight - targetRect.bottom - padding
+      }
+    }
+
+    // calculate max height
+    const maxHeight = Math.max(spaceAbove, spaceBelow)
+    const outOfBounds = portalRect.height > maxHeight
+
+    // portal is out of bounds
+    if (outOfBounds) {
+
+      // flip if neccesary
+      if (ay === 'top' && spaceAbove > spaceBelow) {
+
+        // flip up
+        ay = 'bottom'
+        if (ty === 'top') {
+          ty = 'bottom'
+        } else {
+          ty = 'top'
+        }
+
+      } else if (ay === 'bottom' && spaceBelow > spaceAbove) {
+
+        // flip down
+        ay = 'top'
+        if (ty === 'top') {
+          ty = 'bottom'
+        } else {
+          ty = 'top'
+        }
+
+      }
+
+    }
+
+    // apply max height
+    this.applyStyles(portal, { maxHeight: `${maxHeight}px` })
 
     // use target width
     if (useTargetWidth) {
       this.applyStyles(portal, { width: `${targetRect.width}px` })
     }
 
-    // apply min height to portal
+    // use target height as min-height
     if (useTargetMinHeight) {
       this.applyStyles(portal, { minHeight: `${targetRect.height}px` })
     }
@@ -89,21 +154,22 @@ export default class Dropdown extends Component {
     this.tether = new Tether({
       element: portal,
       target: target,
-      attachment,
-      targetAttachment,
-      offset,
+      attachment: `${ay} ${ax}`,
+      targetAttachment: `${ty} ${tx}`,
+      offset: `${oy} ${ox}`,
       constraints: [{
         to: 'window',
-        attachment: 'together',
         pin: true,
       }],
     })
 
     // fade in
-    this.applyStyles(portal, {
-      opacity: `1`,
-      transition: `opacity .3s cubic-bezier(0.25,0.8,0.25,1)`
-    })
+    this.applyStyles(portal, { opacity: 1 })
+
+    // force reposition
+    if (outOfBounds) {
+      this.tether.position()
+    }
   }
 
   beforeClose(portal, remove) {
@@ -134,7 +200,9 @@ export default class Dropdown extends Component {
         onOpen={this.onOpen}
         beforeClose={this.beforeClose}
       >
-        {children}
+        <div className={'mdl-dropdown__scroller'}>
+          {children}
+        </div>
       </Portal>
     )
   }
