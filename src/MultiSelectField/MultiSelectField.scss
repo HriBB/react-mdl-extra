@@ -2,6 +2,11 @@
   position: relative;
   width: 300px;
   padding: 20px 0;
+  box-sizing: border-box;
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 
   .mdl-multiselect__container {
     position: relative;

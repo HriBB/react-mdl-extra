@@ -1,6 +1,11 @@
 .mdl-selectfield {
   position: relative;
   width: 300px;
+  box-sizing: border-box;
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 
   .mdl-textfield {
     width: 100%;

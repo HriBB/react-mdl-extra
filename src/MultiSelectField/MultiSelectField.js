@@ -36,7 +36,7 @@ export default class MultiSelectField extends Component {
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
     this.onChipClose = this.onChipClose.bind(this)
     if (props.showChipsBelow) {
-      console.warn('Prop "showChipsBelow" is deprecated! Use "chipsBelow" instead.')
+      console.warn('Prop showChipsBelow is deprecated! Use chipsBelow instead.')
     }
   }
 
@@ -75,16 +75,15 @@ export default class MultiSelectField extends Component {
 
     const { focused } = this.state
 
-    const allChildren = Children
-      .toArray(this.props.children)
+    const allChildren = Children.toArray(this.props.children)
 
     const children = allChildren
       .filter(c => value && value.indexOf(c.props.value) === -1)
 
     const options = children.length ? children : <Option disabled>Empty</Option>
 
-    const chips = allChildren
-      .filter(c => value && value.indexOf(c.props.value) > -1)
+    const chips = value
+      .map(v => allChildren.find(c => c.props.value === v))
       .map(({props}) => (
         <Chip key={props.value} onClose={() => this.onChipClose(props.value)}>
           {props.children}

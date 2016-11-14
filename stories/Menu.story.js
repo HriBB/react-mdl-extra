@@ -22,19 +22,14 @@ storiesOf('Menu', module)
       <MenuItem onClick={() => console.log('select three')}>Three</MenuItem>
     </Menu>
   ))
-  .add('left/right top/bottom', () => {
+  .add('position', () => {
     const styles = {
       center: {
         position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px',
         display: 'flex', justifyContent: 'center', alignItems: 'center',
       },
-      wrap: {
-        //textAlign: 'center',
-      },
-      button: {
-        margin: '10px',
-        textTransform: 'none',
-      },
+      wrap: {},
+      button: { margin: '10px', textTransform: 'none' },
     }
     return (
       <div style={styles.center}>
@@ -44,8 +39,8 @@ storiesOf('Menu', module)
             Uses <a href="http://tether.io/">Tether</a> for positioning.
           </p>
           <p>
-            <b>br-tr</b> attachment <b>bottom right</b> targetAttachment <b>top right</b><br />
-            <b>bl-tl</b> attachment <b>bottom left</b> targetAttachment <b>top left</b>
+            <b>br tr</b> attach <b>bottom right</b> corner of the dropdown to the <b>top right</b> corner of the button<br />
+            <b>bl tl</b> attach <b>bottom left</b> corner of the dropdown to the <b>top left</b> corner of the button<br />
           </p>
           <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
             <MenuItem>One</MenuItem>
@@ -70,8 +65,8 @@ storiesOf('Menu', module)
           </Menu>
           <p>
             <br />
-            <b>tr-br</b> attachment <b>top right</b> targetAttachment <b>bottom right</b><br />
-            <b>tl-bl</b> attachment <b>top left</b> targetAttachment <b>bottom left</b><br />
+            <b>tr br</b> attach <b>top right</b> corner of the dropdown to the <b>bottom right</b> corner of the button<br />
+            <b>tl bl</b> attach <b>top left</b> corner of the dropdown to the <b>bottom left</b> corner of the button<br />
           </p>
         </div>
       </div>
@@ -85,8 +80,8 @@ storiesOf('Menu', module)
       topRight: { position: 'absolute', top: '10px', right: '10px' },
       options: { padding: '0 10px' },
       center: {
-        position: 'absolute', top: '50%', left: '50%', width: '400px',
-        marginLeft: '-200px', marginTop: '-20px',
+        position: 'absolute', top: '50%', left: '50%', width: '300px',
+        marginLeft: '-150px', marginTop: '-20px',
         textAlign: 'center', lineHeight: '24px',
       },
       button: {
@@ -97,35 +92,56 @@ storiesOf('Menu', module)
       <div>
         <div style={styles.center}>
           <p>
-            Menu is always constrained to the window.
+            Menu is always constrained to the viewport.
           </p>
-          <p>
-            <b>tl-bl</b> attachment <b>top left</b> targetAttachment <b>bottom left</b><br />
-          </p>
-        </div>
-        <div style={styles.bottomLeft}>
-          <Menu target={<Button style={styles.button} raised>tl bl</Button>} align={'tl bl'}>
-            <MenuItem>One</MenuItem>
-            <MenuItem>Two</MenuItem>
-            <MenuItem>Three</MenuItem>
-          </Menu>
-        </div>
-        <div style={styles.bottomRight}>
-          <Menu target={<Button style={styles.button} raised>tl bl</Button>} align={'tl bl'}>
-            <MenuItem>One</MenuItem>
-            <MenuItem>Two</MenuItem>
-            <MenuItem>Three</MenuItem>
-          </Menu>
         </div>
         <div style={styles.topLeft}>
-          <Menu target={<Button style={styles.button} raised>tr br</Button>} align={'tr br'}>
+          <Menu target={<Button style={styles.button} raised>br tr</Button>} align={'br tr'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+          </Menu>
+          <br /><br />
+          <Menu target={<Button style={styles.button} raised>tr bl</Button>} align={'tr bl'}>
             <MenuItem>One</MenuItem>
             <MenuItem>Two</MenuItem>
             <MenuItem>Three</MenuItem>
           </Menu>
         </div>
         <div style={styles.topRight}>
+          <Menu target={<Button style={styles.button} raised>bl tl</Button>} align={'bl tl'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+          </Menu>
+          <br /><br />
+          <Menu target={<Button style={styles.button} raised>tl br</Button>} align={'tl br'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+          </Menu>
+        </div>
+        <div style={styles.bottomLeft}>
+          <Menu target={<Button style={styles.button} raised>tr bl</Button>} align={'tr bl'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+          </Menu>
+          <br /><br />
           <Menu target={<Button style={styles.button} raised>tr br</Button>} align={'tr br'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+          </Menu>
+        </div>
+        <div style={styles.bottomRight}>
+          <Menu target={<Button style={styles.button} raised>tl br</Button>} align={'tl br'}>
+            <MenuItem>One</MenuItem>
+            <MenuItem>Two</MenuItem>
+            <MenuItem>Three</MenuItem>
+          </Menu>
+          <br /><br />
+          <Menu target={<Button style={styles.button} raised>tl bl</Button>} align={'tl bl'}>
             <MenuItem>One</MenuItem>
             <MenuItem>Two</MenuItem>
             <MenuItem>Three</MenuItem>
@@ -139,7 +155,7 @@ storiesOf('Menu', module)
       center: { margin: '0 auto', textAlign: 'center' },
       info: { margin: '40px auto', maxWidth: '400px', lineHeight: '24px' },
       buttons: { margin: '300px 0 1000px 0' },
-      button: { margin: '0 10px', textTransform: 'none' },
+      button: { margin: '0 10px', minWidth: '80px', textTransform: 'none' },
     }
     return (
       <div style={styles.center}>
@@ -152,45 +168,51 @@ storiesOf('Menu', module)
           <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
             {smallMenuItems}
           </Menu>
+          <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'bl tl'}>
+            {smallMenuItems}
+          </Menu>
+          <br /><br /><br />
+          <Menu target={<Button raised style={styles.button}>tr br</Button>} align={'tr br'}>
+            {smallMenuItems}
+          </Menu>
           <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
             {smallMenuItems}
           </Menu>
           <br /><br /><br />
           <p><b>Big Menu</b></p>
-          <Menu target={<Button raised style={styles.button}>tl tl</Button>} align={'tl tl'}>
-            {bigMenuItems}
-          </Menu>
-          <Menu target={<Button raised style={styles.button}>tr tr</Button>} align={'tr tr'}>
-            {bigMenuItems}
-          </Menu>
-          <br /><br /><br />
-          <Menu target={<Button raised style={styles.button}>bl bl</Button>} align={'bl bl'}>
-            {bigMenuItems}
-          </Menu>
-          <Menu target={<Button raised style={styles.button}>br br</Button>} align={'br br'}>
-            {bigMenuItems}
-          </Menu>
-          <br /><br /><br />
-          <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
-            {bigMenuItems}
-          </Menu>
-          <Menu target={<Button raised style={styles.button}>tr br</Button>} align={'tr br'}>
-            {bigMenuItems}
-          </Menu>
-          <br /><br /><br />
-          <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'bl tl'}>
-            {bigMenuItems}
-          </Menu>
           <Menu target={<Button raised style={styles.button}>br tr</Button>} align={'br tr'}>
             {bigMenuItems}
           </Menu>
+          <Menu target={<Button raised style={styles.button}>bl tl</Button>} align={'bl tl'}>
+            {bigMenuItems}
+          </Menu>
           <br /><br /><br />
+          <Menu target={<Button raised style={styles.button}>tr br</Button>} align={'tr br'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>tl bl</Button>} align={'tl bl'}>
+            {bigMenuItems}
+          </Menu>
+          <br /><br /><br />
+          <Menu target={<Button raised style={styles.button}>tr mc</Button>} align={'tr mc'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>tl mc</Button>} align={'tl mc'}>
+            {bigMenuItems}
+          </Menu>
+          <br /><br /><br />
+          <Menu target={<Button raised style={styles.button}>mr ml</Button>} align={'mr ml'}>
+            {bigMenuItems}
+          </Menu>
+          <Menu target={<Button raised style={styles.button}>ml mr</Button>} align={'ml mr'}>
+            {bigMenuItems}
+          </Menu>
         </div>
       </div>
 
     )
   })
-  .add('parent with hidden overflow', () => {
+  .add('parent with overflow hidden', () => {
     const styles = {
       image: { width: '100%' },
       icon: { position: 'absolute', top: '20px', right: '20px', color: '#fff' },

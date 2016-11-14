@@ -14,8 +14,6 @@ const styles = {
   },
 }
 
-console.log('styles', styles);
-
 storiesOf('Stepper', module)
   .add('default', () => (
     <StatefulStepper>
