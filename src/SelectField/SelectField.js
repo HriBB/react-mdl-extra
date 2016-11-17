@@ -108,7 +108,6 @@ export default class SelectField extends Component {
 
     const dropdownProps = {
       align,
-      className: 'mdl-selectfield-dropdown',
       offset,
       target: <Textfield {...inputProps}/>,
       useTargetWidth: true,

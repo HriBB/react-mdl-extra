@@ -144,7 +144,6 @@ export default class AutoComplete extends Component {
       offset,
       target: <Textfield {...inputProps}/>,
       useTargetWidth: true,
-      className: 'mdl-autocomplete-dropdown',
     }
 
     // render with dropdown

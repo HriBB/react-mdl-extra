@@ -113,7 +113,6 @@ export default class MultiSelectField extends Component {
 
     const dropdownProps = {
       align,
-      className: 'mdl-multiselect-dropdown',
       offset,
       target: input,
       targetNode: this.container,

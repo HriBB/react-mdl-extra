@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { setValueForStyles as applyStyles } from 'react/lib/CSSPropertyOperations'
+import { setValueForStyles as applyStyles } from 'react-dom/lib/CSSPropertyOperations'
 import { findDOMNode } from 'react-dom'
-import classnames from 'classnames'
 import Portal from 'react-portal'
 import Tether from 'tether'
 
@@ -27,7 +26,6 @@ export default class Dropdown extends Component {
       }
     },
     children: PropTypes.any.isRequired,
-    className: PropTypes.string,
     closeOnEsc: PropTypes.bool,
     closeOnOutsideClick: PropTypes.bool,
     offset: PropTypes.string,
@@ -59,8 +57,15 @@ export default class Dropdown extends Component {
 
   onOpen(portalNode) {
     const {
-      align, offset, useTargetWidth, useTargetMinHeight, viewportPadding: pad
+      align,
+      offset,
+      useTargetWidth,
+      useTargetMinHeight,
+      viewportPadding: pad,
     } = this.props
+
+    // append class name
+    portalNode.classList.add('mdl-dropdown')
 
     // window is our boundary
     const { innerWidth, innerHeight } = window
@@ -199,11 +204,9 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    const { children, className, closeOnEsc, closeOnOutsideClick, target } = this.props
-    const portalClass = classnames('mdl-dropdown', className)
+    const { children, closeOnEsc, closeOnOutsideClick, target } = this.props
     return (
       <Portal
-        className={portalClass}
         closeOnEsc={closeOnEsc}
         closeOnOutsideClick={closeOnOutsideClick}
         openByClickOn={target}
