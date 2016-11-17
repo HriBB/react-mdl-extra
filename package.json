@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@kadira/storybook": "^2.29.7",
+    "@kadira/storybook-deployer": "^1.2.0",
     "autoprefixer": "^6.5.3",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
@@ -89,9 +90,7 @@
     "webpack": "^1.13.3"
   },
   "dependencies": {
-    "@kadira/storybook-deployer": "^1.2.0",
     "classnames": "^2.2.5",
-    "popper.js": "^0.6.4",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mdl": "^1.7.2",
