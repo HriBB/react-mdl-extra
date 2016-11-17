@@ -87,7 +87,6 @@ export default class Dropdown extends Component {
       } else if (ay === 'bottom') {
         spaceAbove = target.top - pad + oy
         spaceBelow = innerHeight - target.bottom - pad + oy
-      } else if (ay === 'middle') {
       }
     } else if (ty === 'bottom') {
       if (ay === 'top') {
@@ -96,7 +95,6 @@ export default class Dropdown extends Component {
       } else if (ay === 'bottom') {
         spaceAbove = target.bottom - pad + oy
         spaceBelow = innerHeight - target.bottom - pad + oy
-      } else if (ay === 'middle') {
       }
     } else if (ty === 'middle') {
       if (ay === 'top' || ay === 'bottom') {

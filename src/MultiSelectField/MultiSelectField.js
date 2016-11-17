@@ -36,6 +36,7 @@ export default class MultiSelectField extends Component {
     this.onTextfieldBlur = this.onTextfieldBlur.bind(this)
     this.onChipClose = this.onChipClose.bind(this)
     if (props.showChipsBelow) {
+      // eslint-disable-next-line no-console
       console.warn('Prop showChipsBelow is deprecated! Use chipsBelow instead.')
     }
   }
@@ -69,7 +70,7 @@ export default class MultiSelectField extends Component {
 
   render() {
     const {
-      align, className, chipsAfter, chipsOutside, showChipsBelow,
+      align, className, chipsAfter, chipsOutside, showChipsBelow,// eslint-disable-line no-unused-vars
       error, label, offset, readOnly, value,
     } = this.props
 
