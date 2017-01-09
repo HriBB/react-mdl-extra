@@ -30,17 +30,26 @@ export default class OptionList extends Component {
   }
 
   componentDidMount() {
+    // add keydown event listener
     document.addEventListener('keydown', this.keyDown, true)
     // scroll into view
     if (!this.props.value) return // no value
-    const parent = this.list.parentNode
-    if (parent.clientHeight >= parent.scrollHeight) return // no scroller
-    const [selected] = this.list.getElementsByClassName('mdl-option--selected')
-    parent.scrollTop = selected.offsetTop - (parent.clientHeight / 2)
+    this.scrollTimeout = setTimeout(() => {
+      this.scrollTimeout = null
+      if (this.list.scrollHeight > this.list.offsetHeight) {
+        const [selected] = this.list.getElementsByClassName('mdl-option--selected')
+        this.list.scrollTop = selected.offsetTop - (this.list.clientHeight / 2)
+      }
+    })
   }
 
   componentWillUnmount() {
+    // remove event listener
     document.removeEventListener('keydown', this.keyDown, true)
+    // clear scroll timeout if necessary
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout)
+    }
   }
 
   render() {
