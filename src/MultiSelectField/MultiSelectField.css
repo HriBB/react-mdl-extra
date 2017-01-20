@@ -1,0 +1,122 @@
+.mdl-multiselect {
+    position: relative;
+    width: 300px;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+.mdl-multiselect *, .mdl-multiselect *:before, .mdl-multiselect *:after {
+    box-sizing: inherit;
+}
+.mdl-multiselect .mdl-multiselect__container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.mdl-multiselect .mdl-multiselect__container:after {
+    z-index: 9;
+    background-color: #3f51b5;
+    bottom: -1px;
+    content: '';
+    height: 2px;
+    left: 45%;
+    position: absolute;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+    width: 10px;
+}
+.mdl-multiselect .mdl-chip {
+    margin: 2px 6px 4px 0;
+}
+.mdl-multiselect .mdl-multiselect__textfield {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 40%;
+    margin: 0;
+}
+.mdl-multiselect .mdl-multiselect__input {
+    display: block;
+    width: 100%;
+    height: 27px;
+    border: none;
+    padding: 4px 0;
+    background: none;
+    overflow: visible;
+}
+.mdl-multiselect .mdl-multiselect__label {
+    display: block;
+    position: absolute;
+    font-size: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-right: 24px;
+    pointer-events: none;
+    height: 28px;
+    line-height: 28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.26);
+}
+.mdl-multiselect .mdl-multiselect__arrow {
+    pointer-events: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    margin: -2px 0 0 -4px;
+    cursor: pointer;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
+}
+.mdl-multiselect.mdl-multiselect--chips-outside .mdl-multiselect__textfield {
+    width: 100%;
+    min-width: 100%;
+}
+.mdl-multiselect.mdl-multiselect--chips-outside .mdl-multiselect__chips {
+    margin-bottom: 5px;
+}
+.mdl-multiselect.mdl-multiselect--chips-outside.mdl-multiselect--chips-after .mdl-multiselect__chips {
+    margin-bottom: 0;
+    margin-top: 3px;
+}
+.mdl-multiselect.mdl-multiselect--focused .mdl-multiselect__container:after {
+    left: 0;
+    visibility: visible;
+    width: 100%;
+}
+.mdl-multiselect.mdl-multiselect--focused .mdl-multiselect__arrow {
+    border-width: 0 4px 4px 4px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.26) transparent;
+}
+.mdl-multiselect.mdl-multiselect--error .mdl-textfield__error {
+    visibility: visible;
+}
+.mdl-multiselect.mdl-multiselect--error .mdl-multiselect__container {
+    border-bottom-color: #d50000;
+}
+.mdl-multiselect.mdl-multiselect--error .mdl-multiselect__container:after {
+    background-color: #d50000;
+}
+.mdl-multiselect.mdl-multiselect--error .mdl-multiselect__label {
+    color: #d50000;
+}
+.mdl-multiselect.mdl-multiselect--error .mdl-multiselect__arrow {
+    border-color: #d50000 transparent transparent transparent;
+}
+.mdl-multiselect.mdl-multiselect--error .mdl-multiselect__arrow.mdl-multiselect__arrow--expanded {
+    border-width: 0 4px 4px 4px;
+    border-color: transparent transparent #d50000 transparent;
+}
+.mdl-multiselect.mdl-multiselect--error.mdl-multiselect--focused .mdl-multiselect__arrow {
+    border-color: transparent transparent #d50000 transparent;
+}

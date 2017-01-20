@@ -1,0 +1,37 @@
+.mdl-autocomplete {
+    position: relative;
+    width: 300px;
+    box-sizing: border-box;
+}
+.mdl-autocomplete *, .mdl-autocomplete *:before, .mdl-autocomplete *:after {
+    box-sizing: inherit;
+}
+.mdl-autocomplete .mdl-textfield {
+    width: 100%;
+}
+.mdl-autocomplete .mdl-textfield.is-invalid .mdl-textfield__label {
+    color: #d50000;
+}
+.mdl-autocomplete .mdl-autocomplete__arrow {
+    pointer-events: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin: -2px 0 0 -4px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
+}
+.mdl-autocomplete.mdl-autocomplete--error .mdl-autocomplete__arrow {
+    border-color: #d50000 transparent transparent transparent;
+}
+.mdl-autocomplete.mdl-autocomplete--focused:not(.mdl-autocomplete--empty) .mdl-autocomplete__arrow {
+    border-width: 0 4px 4px 4px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.26) transparent;
+}
+.mdl-autocomplete.mdl-autocomplete--focused:not(.mdl-autocomplete--empty).mdl-autocomplete--error .mdl-autocomplete__arrow {
+    border-color: transparent transparent #d50000 transparent;
+}

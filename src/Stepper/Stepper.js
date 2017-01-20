@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import { Icon } from 'react-mdl'
 
-import './Stepper.scss'
+import './Stepper.css'
 
 const Stepper = props => {
   const { activeStep, horizontal, hideLastTitle, onStepTitleClick } = props

@@ -1,0 +1,199 @@
+.mdl-stepper {
+    position: relative;
+    max-width: 800px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.mdl-stepper *, .mdl-stepper *:before, .mdl-stepper *:after {
+    box-sizing: inherit;
+}
+.mdl-stepper .mdl-stepper__steps {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step {
+    position: relative;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title .mdl-stepper__title-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title .mdl-stepper__title-text {
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title .mdl-stepper__title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 50%;
+    background: #a6a6a6;
+    color: #fff;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title .mdl-stepper__title-icon .material-icons {
+    font-size: 15px;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__content {
+    display: none;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step--active .mdl-stepper__title .mdl-stepper__title-text {
+    font-weight: bold;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step--active .mdl-stepper__title .mdl-stepper__title-icon {
+    background: #0288d1;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step--active .mdl-stepper__content {
+    display: flex;
+}
+.mdl-stepper .mdl-stepper__steps .mdl-stepper__step--completed .mdl-stepper__title .mdl-stepper__title-icon {
+    background: #0288d1;
+}
+@media (max-width: 799px) {
+    .mdl-stepper .mdl-stepper__steps {
+        padding: 20px 14px;
+    }
+    .mdl-stepper .mdl-stepper__steps .mdl-stepper__step {
+        margin-bottom: 20px;
+    }
+    .mdl-stepper .mdl-stepper__steps .mdl-stepper__step:not(:last-child):after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 24px;
+        width: 1px;
+        bottom: -20px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    .mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title {
+        height: 64px;
+        align-items: flex-start;
+    }
+    .mdl-stepper .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__content {
+        margin: 0 10px 0 50px;
+    }
+}
+@media (max-width: 480px) {
+    .mdl-stepper .mdl-stepper__steps {
+        padding: 20px 4px;
+    }
+}
+
+.mdl-stepper--vertical {
+    display: flex;
+    flex-direction: column;
+}
+.mdl-stepper--vertical .mdl-stepper__steps {
+    padding: 20px 14px;
+}
+.mdl-stepper--vertical .mdl-stepper__steps .mdl-stepper__step {
+    margin-bottom: 20px;
+}
+.mdl-stepper--vertical .mdl-stepper__steps .mdl-stepper__step:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 24px;
+    width: 1px;
+    bottom: -20px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.mdl-stepper--vertical .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title {
+    display: flex;
+    align-items: flex-start;
+    height: 64px;
+}
+.mdl-stepper--vertical .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__content {
+    margin: 0 10px 0 50px;
+}
+@media (max-width: 480px) {
+    .mdl-stepper--vertical .mdl-stepper__steps {
+        padding: 20px 4px;
+    }
+}
+.mdl-stepper--vertical .mdl-stepper__last {
+    position: relative;
+    margin: -40px 24px 40px 64px;
+}
+
+.mdl-stepper--horizontal {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+}
+@media (max-width: 799px) {
+    .mdl-stepper--horizontal .mdl-stepper__last {
+        position: relative;
+        margin: -40px 24px 40px 64px;
+    }
+}
+@media (min-width: 800px) {
+    .mdl-stepper--horizontal .mdl-stepper__steps {
+        position: relative;
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 24px 0 14px;
+    }
+    .mdl-stepper--horizontal .mdl-stepper__steps:after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 44px;
+        left: 14px;
+        right: 24px;
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    .mdl-stepper--horizontal .mdl-stepper__steps:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 88px;
+        pointer-events: none;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    .mdl-stepper--horizontal .mdl-stepper__steps .mdl-stepper__step {
+        position: static;
+        margin: 0;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .mdl-stepper--horizontal .mdl-stepper__steps .mdl-stepper__step .mdl-stepper__title .mdl-stepper__title-text {
+        max-width: 124px;
+    }
+    .mdl-stepper--horizontal .mdl-stepper__steps .mdl-stepper__step--active .mdl-stepper__content {
+        position: absolute;
+        top: 88px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 24px;
+    }
+    .mdl-stepper--horizontal .mdl-stepper__last {
+        position: absolute;
+        display: flex;
+        flex: 1;
+        top: 88px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 24px;
+    }
+}

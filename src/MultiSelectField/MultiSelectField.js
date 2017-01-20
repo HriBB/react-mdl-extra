@@ -6,7 +6,7 @@ import Dropdown from '../Dropdown'
 import OptionList from '../OptionList'
 import Option from '../Option'
 
-import './MultiSelectField.scss'
+import './MultiSelectField.css'
 
 export default class MultiSelectField extends Component {
 

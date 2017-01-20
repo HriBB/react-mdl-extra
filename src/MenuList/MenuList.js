@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import KEYCODE from '../keycodes'
 
-import './MenuList.scss'
+import './MenuList.css'
 
 export default class MenuList extends Component {
 

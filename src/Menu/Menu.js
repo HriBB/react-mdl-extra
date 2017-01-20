@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import Dropdown from '../Dropdown'
 import MenuList from '../MenuList'
 
-import './Menu.scss'
+import './Menu.css'
 
 export default class Menu extends Component {
 
