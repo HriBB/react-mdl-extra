@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom'
 import Portal from 'react-portal'
 import Tether from 'tether'
 
-import './Dropdown.scss'
+import './Dropdown.css'
 
 const POS = {
   t: 'top',

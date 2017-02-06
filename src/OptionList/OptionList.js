@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import KEYCODE from '../keycodes'
 
-import './OptionList.scss'
+import './OptionList.css'
 
 export default class OptionList extends Component {
 

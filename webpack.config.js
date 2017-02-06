@@ -19,7 +19,7 @@ var config = {
     libraryTarget: 'umd'
   },
   resolve: {
-    extensions: ['', '.js', '.scss', '.css'],
+    extensions: ['', '.js', '.css'],
   },
   externals: {
     'react': 'react',
@@ -36,8 +36,8 @@ var config = {
       loader: 'babel',
       exclude: /node_modules/,
     },{
-      test: /\.(scss|css)$/,
-      loader: ExtractTextPlugin.extract('css!postcss!sass'),
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('css!postcss'),
     }]
   },
   postcss: [

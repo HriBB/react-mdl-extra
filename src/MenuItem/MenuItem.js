@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import KEYCODES from '../keycodes'
 
-import './MenuItem.scss'
+import './MenuItem.css'
 
 export default class MenuItem extends Component {
 

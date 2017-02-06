@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import Dropdown from '../Dropdown'
 import OptionList from '../OptionList'
 
-import './SelectField.scss'
+import './SelectField.css'
 
 export default class SelectField extends Component {
 

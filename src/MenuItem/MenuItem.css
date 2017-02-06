@@ -1,0 +1,16 @@
+.mdl-portalmenu__item {
+    cursor: pointer;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mdl-portalmenu__item:hover {
+    background: #eee;
+}
+.mdl-portalmenu__item:focus {
+    outline: none;
+    background: #eee;
+}

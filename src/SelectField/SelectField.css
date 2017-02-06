@@ -1,0 +1,37 @@
+.mdl-selectfield {
+    position: relative;
+    width: 300px;
+    box-sizing: border-box;
+}
+.mdl-selectfield *, .mdl-selectfield *:before, .mdl-selectfield *:after {
+    box-sizing: inherit;
+}
+.mdl-selectfield .mdl-textfield {
+    width: 100%;
+}
+.mdl-selectfield .mdl-textfield.is-invalid .mdl-textfield__label {
+    color: #d50000;
+}
+.mdl-selectfield .mdl-selectfield__arrow {
+    pointer-events: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin: -2px 0 0 -4px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px 4px 0 4px;
+    border-color: rgba(0, 0, 0, 0.26) transparent transparent transparent;
+}
+.mdl-selectfield.mdl-selectfield--error .mdl-selectfield__arrow {
+    border-color: #d50000 transparent transparent transparent;
+}
+.mdl-selectfield.mdl-selectfield--focused:not(.mdl-selectfield--empty) .mdl-selectfield__arrow {
+    border-width: 0 4px 4px 4px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.26) transparent;
+}
+.mdl-selectfield.mdl-selectfield--focused:not(.mdl-selectfield--empty).mdl-selectfield--error .mdl-selectfield__arrow {
+    border-color: transparent transparent #d50000 transparent;
+}

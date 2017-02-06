@@ -1,0 +1,6 @@
+.mdl-portalmenu {
+    box-sizing: border-box;
+}
+.mdl-portalmenu *, .mdl-portalmenu *:before, .mdl-portalmenu *:after {
+    box-sizing: inherit;
+}

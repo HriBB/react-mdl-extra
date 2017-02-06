@@ -1,0 +1,14 @@
+.mdl-portalmenu__list {
+    display: block;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-width: 124px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+.mdl-portalmenu__list *, .mdl-portalmenu__list *:before, .mdl-portalmenu__list *:after {
+    box-sizing: inherit;
+}

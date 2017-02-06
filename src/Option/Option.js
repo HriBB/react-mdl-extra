@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import KEYCODES from '../keycodes'
 
-import './Option.scss'
+import './Option.css'
 
 export default class Option extends Component {
 

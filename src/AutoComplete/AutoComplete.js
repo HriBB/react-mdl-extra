@@ -6,7 +6,7 @@ import Dropdown from '../Dropdown'
 import OptionList from '../OptionList'
 import Option from '../Option'
 
-import './AutoComplete.scss'
+import './AutoComplete.css'
 
 export default class AutoComplete extends Component {
 
