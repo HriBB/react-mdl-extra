@@ -88,6 +88,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "prop-types": "^15.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-mdl": "^1.9.0",
