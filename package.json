@@ -88,8 +88,9 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "prop-types": "^15.5.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-mdl": "^1.9.0",
     "react-portal": "^3.0.0",
     "tether": "^1.4.0"

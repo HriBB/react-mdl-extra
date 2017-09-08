@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { setValueForStyles as applyStyles } from 'react-dom/lib/CSSPropertyOperations'
 import { findDOMNode } from 'react-dom'
 import Portal from 'react-portal'
