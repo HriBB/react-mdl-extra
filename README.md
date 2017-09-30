@@ -1,5 +1,7 @@
 # React-MDL SelectField
 
+**This project is not maintained anymore. If someone wishes to take over, let me know ;)**
+
 Extra components for [React Material Design Lite](https://github.com/tleunen/react-mdl).
 
 All components use a custom `Dropdown`, that uses [react-portal](https://github.com/tajo/react-portal) to render itself to document `body`, and [Tether](tether.io) for positioning.
@@ -112,12 +114,12 @@ Attach **b**ottom **r**ight edge of the dropdown to the **t**op **r**ight edge o
 ## TODO
 
 - [x] Split Dropdown into a separate component
-- [ ] Use native controls on mobile
-- [ ] Improve AutoComplete on mobile
+- [x] ~~Use native controls on mobile~~
+- [x] ~~Improve AutoComplete on mobile~~
 - [x] Improve styles and remove sass
 - [x] Improve position declaration
 - [x] Create `MultiSelectField`
 - [x] Create `AutoCompleteField`
-- [ ] Create `DatePickerField`
-- [ ] Key and focus handling
-- [ ] Add tests
+- [x] ~~Create `DatePickerField`~~
+- [x] ~~Key and focus handling~~
+- [x] ~~Add tests~~
